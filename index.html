@@ -9,36 +9,37 @@
 <title>My Playlist</title>
 <style>
 :root{
-  --pink:#ff8fb1;        /* 浅樱粉：填充、主按钮、竖条 */
-  --pink-dark:#f4688f;   /* 深一点的粉：文字、悬停 */
-  --pink-soft:#fff6f9;   /* 极浅粉：背景块 */
-  --pink-line:#ffd8e4;   /* 浅粉：描边、分隔线 */
-  --ink:#141414;
-  --muted:#9a9a9a;
+  --pink:#ff8fb1;
+  --pink-dark:#f4688f;
+  --pink-deep:#e14e78;
+  --pink-soft:#fff6f9;
+  --pink-line:#ffd8e4;
+  --ink:#3a3338;          /* 暖炭灰，替代纯黑 */
+  --ink-name:#3a3338;
+  --muted:#a09096;
 }
 *{box-sizing:border-box}
 
 body{
   font-family:system-ui,"HarmonyOS Sans",sans-serif;
-  margin:0 auto;
-  max-width:1180px;
+  margin:0 auto;max-width:1180px;
   padding:clamp(18px,3.2vw,40px) clamp(16px,3.6vw,48px) clamp(32px,5vw,64px);
   background:#ffffff;color:var(--ink);
-  line-height:1.5;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
 }
 
 /* ---------- 顶部工具栏 ---------- */
 #bar{
   display:flex;gap:10px;align-items:center;flex-wrap:wrap;
   padding:16px 18px;margin-bottom:18px;
-  background:#fff;
-  border:1.5px solid var(--pink-line);
+  background:#fff;border:1.5px solid var(--pink-line);
   border-radius:18px;
   box-shadow:0 6px 24px rgba(255,143,177,.14);
 }
-#bar label{font-size:14px;display:flex;align-items:center;gap:7px}
+#bar label{font-size:14px;display:flex;align-items:center;gap:7px;color:var(--ink)}
 
-/* ---------- 按钮 ---------- */
+/* ---------- 文字按钮 ---------- */
 button{
   padding:10px 18px;font-size:14px;font-weight:600;
   border-radius:999px;border:1.5px solid var(--pink-line);
@@ -53,7 +54,23 @@ button.main{
   box-shadow:0 6px 18px rgba(255,143,177,.5);
 }
 button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
-button.mini{padding:7px 13px;font-size:13px;min-width:46px}
+
+/* ---------- 圆形图标按钮（每行的播放键） ---------- */
+.pbtn{
+  width:38px;height:38px;min-width:38px;padding:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:#fff;border:1.5px solid var(--pink-line);
+  color:var(--pink-dark);
+  transition:all .16s ease;
+}
+.pbtn:hover{
+  background:var(--pink);border-color:var(--pink);color:#fff;
+  transform:scale(1.07);
+  box-shadow:0 3px 10px rgba(255,143,177,.45);
+}
+.pbtn:active{transform:scale(.94)}
+.pbtn svg{display:block}
 
 /* ---------- 拖拽区 ---------- */
 #drop{
@@ -70,13 +87,13 @@ button.mini{padding:7px 13px;font-size:13px;min-width:46px}
   display:flex;gap:14px;align-items:center;
   padding:13px 14px;
   border-bottom:1px solid #fdeef3;
-  border-radius:10px;
+  border-radius:12px;
   transition:background .12s;
 }
 .row:hover{background:var(--pink-soft)}
 .name{
   flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
-  font-size:14.5px;color:#1f1f1f;
+  font-size:14.5px;color:var(--ink-name);
 }
 
 /* ---------- 复选框 ---------- */
@@ -89,12 +106,12 @@ input[type=checkbox]{
 input[type=range]{
   -webkit-appearance:none;appearance:none;
   width:132px;height:8px;border-radius:999px;
-  background:#f2f2f2;outline:none;cursor:pointer;flex:none;
+  background:#f3f0f1;outline:none;cursor:pointer;flex:none;
 }
 input[type=range]::-webkit-slider-thumb{
   -webkit-appearance:none;width:19px;height:19px;border-radius:50%;
   background:#fff;border:3px solid var(--pink);cursor:pointer;
-  box-shadow:0 2px 6px rgba(0,0,0,.14);
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
 }
 input[type=range]::-moz-range-thumb{
   width:14px;height:14px;border-radius:50%;
@@ -107,7 +124,7 @@ input[type=range]::-moz-range-thumb{
   color:var(--pink-dark);font-family:ui-monospace,Consolas,monospace;
   cursor:pointer;flex:none;
 }
-.vn:hover{color:#e14e78;text-decoration:underline}
+.vn:hover{color:var(--pink-deep);text-decoration:underline}
 
 /* ---------- 其他 ---------- */
 #msg{font-size:13px;color:var(--pink-dark);font-weight:600}
@@ -119,7 +136,7 @@ textarea{
   resize:vertical;
 }
 textarea:focus{outline:none;border-color:var(--pink)}
-::placeholder{color:#d4bcc5}
+::placeholder{color:#d9c5cd}
 </style>
 </head>
 <body>
@@ -128,7 +145,7 @@ textarea:focus{outline:none;border-color:var(--pink)}
   <button id="pick" class="main">选择音频文件</button>
   <button id="play">▶ 播放选中</button>
   <button id="stop">■ 全部停止</button>
-  <button id="reset">↺ 全部恢复 25%</button>
+  <button id="reset">↺ 全部恢复 30%</button>
   <label><input type="checkbox" id="loop" checked> 循环</label>
   <label>
     总音量 <input id="master" type="range" min="0" max="1" step="0.01" value="1">
@@ -146,16 +163,19 @@ textarea:focus{outline:none;border-color:var(--pink)}
 
 <script>
 var KEY = "multiAudio.v5";
-var DEF = 0.25;                    /* 默认音量 25%，改这里可以换默认值 */
+var DEF = 0.3;
 var tracks = [];
 var $ = function(id){ return document.getElementById(id); };
+
+var ICON_PLAY  = '<svg viewBox="0 0 24 24" width="15" height="15"><polygon points="8,5 20,12 8,19" fill="currentColor"/></svg>';
+var ICON_PAUSE = '<svg viewBox="0 0 24 24" width="15" height="15"><rect x="7" y="5" width="4.2" height="14" rx="1.6" fill="currentColor"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.6" fill="currentColor"/></svg>';
 
 function loadCfg(){ try{ return JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){ return {}; } }
 function saveCfg(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
 
 function paint(el){
   var p = Math.round(el.value * 100);
-  el.style.background = "linear-gradient(to right,#ff8fb1 " + p + "%,#f2f2f2 " + p + "%)";
+  el.style.background = "linear-gradient(to right,#ff8fb1 " + p + "%,#f3f0f1 " + p + "%)";
 }
 
 function addFiles(fs){
@@ -169,7 +189,11 @@ function addFiles(fs){
       var row = document.createElement("div"); row.className = "row";
       var cb  = document.createElement("input"); cb.type = "checkbox"; cb.checked = true;
       var nm  = document.createElement("span"); nm.className = "name"; nm.textContent = file.name;
-      var bt  = document.createElement("button"); bt.className = "mini"; bt.textContent = "▶";
+
+      var bt = document.createElement("button");
+      bt.className = "pbtn";
+      bt.title = "单独试听";
+      bt.innerHTML = ICON_PLAY;
 
       var vo = document.createElement("input");
       vo.type = "range"; vo.min = 0; vo.max = 1; vo.step = 0.01;
@@ -202,8 +226,8 @@ function addFiles(fs){
       };
 
       bt.onclick = function(){ if (au.paused) { au.play(); } else { au.pause(); } };
-      au.onplay  = function(){ bt.textContent = "⏸"; };
-      au.onpause = function(){ bt.textContent = "▶"; };
+      au.onplay  = function(){ bt.innerHTML = ICON_PAUSE; };
+      au.onpause = function(){ bt.innerHTML = ICON_PLAY; };
       au.onerror = function(){ nm.textContent = file.name + "（无法播放）"; };
 
       row.appendChild(cb); row.appendChild(nm);
@@ -235,8 +259,6 @@ $("stop").onclick = function(){
     tracks[i].a.pause(); tracks[i].a.currentTime = 0;
   }
 };
-
-/* ★ 全部恢复到默认 30%，并清掉记录 */
 $("reset").onclick = function(){
   var c = loadCfg(); c.vol = c.vol || {};
   for (var i = 0; i < tracks.length; i++) {
@@ -250,7 +272,6 @@ $("reset").onclick = function(){
   saveCfg(c);
   $("msg").textContent = "已全部恢复到 " + Math.round(DEF * 100) + "%";
 };
-
 $("loop").onchange = function(){
   var v = this.checked;
   for (var i = 0; i < tracks.length; i++) tracks[i].a.loop = v;
