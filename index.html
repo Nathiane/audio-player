@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#141414">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>My Playlist</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;padding:14px;background:#141414;color:#eee}
+#bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+button{padding:8px 14px;font-size:14px;border-radius:8px;border:1px solid #444;
+       background:#262626;color:#eee;cursor:pointer}
+button.main{background:#2b6ef2;border-color:#2b6ef2}
+#drop{border:2px dashed #444;border-radius:12px;padding:24px;text-align:center;
+      color:#999;font-size:14px;margin-bottom:12px}
+.row{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid #222}
+.name{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:14px}
+input[type=range]{width:110px}
+#msg{font-size:13px;color:#9ad}
+textarea{width:100%;height:90px;background:#1c1c1c;color:#eee;border:1px solid #333;
+         border-radius:8px;padding:8px;font-size:12px;font-family:monospace;margin-top:10px}
+</style>
+</head>
+<body>
+
+<div id="bar">
+  <button id="pick" class="main">选择音频文件</button>
+  <button id="play">▶ 播放选中</button>
+  <button id="stop">■ 全部停止</button>
+  <label style="font-size:14px"><input type="checkbox" id="loop" checked> 循环</label>
+  <label style="font-size:14px">总音量 <input id="master" type="range" min="0" max="1" step="0.01" value="1"></label>
+  <button id="exp">导出设置</button>
+  <button id="imp">导入设置</button>
+  <span id="msg"></span>
+</div>
+
+<div id="drop">把音频文件拖到这里也可以</div>
+<div id="list"></div>
+<textarea id="cfg" placeholder="设置文本会出现在这里（导出/导入用）"></textarea>
+<input type="file" id="f" multiple accept="audio/*" hidden>
+
+<script>
+var KEY = "multiAudio.v5";
+var tracks = [];
+var $ = function(id){ return document.getElementById(id); };
+
+function loadCfg(){ try{ return JSON.parse(localStorage.getItem(KEY)||"{}"); }catch(e){ return {}; } }
+function saveCfg(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+
+function addFiles(fs){
+  var cfg = loadCfg();
+  for (var i = 0; i < fs.length; i++) {
+    (function(file){
+      var id = file.name + "|" + file.size;
+      for (var k = 0; k < tracks.length; k++) { if (tracks[k].id === id) return; }
+
+      var url = URL.createObjectURL(file);
+      var row = document.createElement("div"); row.className = "row";
+      var cb  = document.createElement("input"); cb.type = "checkbox"; cb.checked = true;
+      var nm  = document.createElement("span"); nm.className = "name"; nm.textContent = file.name;
+      var bt  = document.createElement("button"); bt.textContent = "▶";
+      var vo  = document.createElement("input");
+      vo.type = "range"; vo.min = 0; vo.max = 1; vo.step = 0.01;
+      vo.value = (cfg.vol && cfg.vol[id] !== undefined) ? cfg.vol[id] : 0.3;
+
+      var au = new Audio(url);
+      au.loop = $("loop").checked;
+      au.volume = Math.min(1, vo.value * $("master").value);
+
+      vo.oninput = function(){
+        au.volume = Math.min(1, vo.value * $("master").value);
+        var c = loadCfg(); c.vol = c.vol || {};
+        c.vol[id] = parseFloat(vo.value); saveCfg(c);
+      };
+      bt.onclick = function(){ if (au.paused) { au.play(); } else { au.pause(); } };
+      au.onplay  = function(){ bt.textContent = "⏸"; };
+      au.onpause = function(){ bt.textContent = "▶"; };
+      au.onerror = function(){ nm.textContent = file.name + "（无法播放）"; };
+
+      row.appendChild(cb); row.appendChild(nm);
+      row.appendChild(bt); row.appendChild(vo);
+      $("list").appendChild(row);
+      tracks.push({ id: id, c: cb, a: au, v: vo });
+    })(fs[i]);
+  }
+  $("msg").textContent = "共 " + tracks.length + " 个";
+}
+
+$("pick").onclick = function(){ $("f").click(); };
+$("f").onchange = function(e){ addFiles(e.target.files); e.target.value = ""; };
+
+var drop = $("drop");
+drop.ondragover = function(e){ e.preventDefault(); };
+drop.ondrop = function(e){
+  e.preventDefault();
+  if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+};
+
+$("play").onclick = function(){
+  for (var i = 0; i < tracks.length; i++) {
+    if (tracks[i].c.checked) { try { tracks[i].a.play(); } catch(err){} }
+  }
+};
+$("stop").onclick = function(){
+  for (var i = 0; i < tracks.length; i++) {
+    tracks[i].a.pause(); tracks[i].a.currentTime = 0;
+  }
+};
+$("loop").onchange = function(){
+  var v = this.checked;
+  for (var i = 0; i < tracks.length; i++) tracks[i].a.loop = v;
+};
+$("master").oninput = function(){
+  var m = this.value;
+  for (var i = 0; i < tracks.length; i++)
+    tracks[i].a.volume = Math.min(1, tracks[i].v.value * m);
+};
+
+$("exp").onclick = function(){
+  var o = { vol: {} };
+  for (var i = 0; i < tracks.length; i++) o.vol[tracks[i].id] = parseFloat(tracks[i].v.value);
+  saveCfg(o);
+  var t = JSON.stringify(o);
+  $("cfg").value = t;
+  try { navigator.clipboard.writeText(t); $("msg").textContent = "已导出并复制"; }
+  catch(e){ $("msg").textContent = "已导出，请手动复制"; }
+};
+$("imp").onclick = function(){
+  try {
+    var o = JSON.parse($("cfg").value);
+    saveCfg(o);
+    for (var i = 0; i < tracks.length; i++) {
+      if (o.vol && o.vol[tracks[i].id] !== undefined) {
+        tracks[i].v.value = o.vol[tracks[i].id];
+        tracks[i].a.volume = Math.min(1, tracks[i].v.value * $("master").value);
+      }
+    }
+    $("msg").textContent = "已导入";
+  } catch(e){ $("msg").textContent = "导入失败：文本格式不对"; }
+};
+</script>
+
+<script>
+/* 注册“本地仓库工人”：首次打开后把文件存起来，以后断网可用 */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function(){
+    navigator.serviceWorker.register("./sw.js").catch(function(){});
+  });
+}
+</script>
+</body>
+</html>
