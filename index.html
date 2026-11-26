@@ -40,6 +40,20 @@ body{
 #bar label{font-size:14px;display:flex;align-items:center;gap:7px;color:var(--ink)}
 #bar .wide input[type=range]{flex:1;width:auto;min-width:80px}
 
+/* 拖拽提示：并入工具栏 */
+#drophint{
+  flex:1 1 100%;
+  border:1.5px dashed var(--pink-line);border-radius:12px;
+  background:var(--pink-soft);
+  padding:10px 14px;text-align:center;
+  font-size:12.5px;color:var(--pink-dark);
+  transition:all .15s ease;
+}
+#drophint.hot{
+  border-color:var(--pink);background:#ffe8f0;color:var(--pink-deep);
+  box-shadow:inset 0 0 0 3px rgba(255,143,177,.15);
+}
+
 /* ================= 按钮 ================= */
 button{
   padding:10px 18px;font-size:14px;font-weight:600;
@@ -113,15 +127,6 @@ button.q5:hover{background:var(--pink-soft);border-color:var(--pink)}
 .cfgft{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
 .cfgft button{font-size:13px;padding:8px 16px}
 
-/* ================= 拖拽区 ================= */
-#drop{
-  border:2px dashed var(--pink-line);border-radius:18px;
-  padding:clamp(22px,3vw,34px);text-align:center;
-  color:var(--pink-dark);font-size:14px;
-  background:var(--pink-soft);
-  margin-bottom:18px;
-}
-
 /* ================= 列表 ================= */
 #list{margin-top:4px}
 .row{
@@ -187,17 +192,31 @@ input[type=range]:disabled{cursor:not-allowed}
 .gate-card{
   width:100%;max-width:440px;
   background:#fff;border:1.5px solid var(--pink-line);
-  border-radius:26px;padding:34px 28px 26px;
+  border-radius:26px;padding:30px 28px 24px;
   box-shadow:0 18px 50px rgba(255,143,177,.35);
   text-align:center;
+  position:relative;
+}
+.gate-crown{
+  color:var(--pink);margin-bottom:6px;
+  animation:crownFloat 2.6s ease-in-out infinite;
+}
+@keyframes crownFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
 }
 .gate-card h2{
-  font-size:20px;margin:0 0 4px;color:var(--ink);
+  font-size:20px;margin:0 0 6px;color:var(--ink);
   line-height:1.55;font-weight:700;letter-spacing:.3px;
 }
 .gate-en{
   font-size:13px;font-style:italic;letter-spacing:.4px;
-  color:var(--pink-dark);margin-bottom:16px;
+  color:var(--pink-dark);margin-bottom:2px;
+  font-family:Georgia,"Times New Roman",serif;
+}
+.gate-by{
+  font-size:11.5px;font-style:italic;color:#c0a8b2;
+  text-align:right;padding-right:4px;margin-bottom:16px;
   font-family:Georgia,"Times New Roman",serif;
 }
 .gate-sub{font-size:12.5px;color:#b8a2ab;margin-bottom:18px}
@@ -219,10 +238,10 @@ input[type=range]:disabled{cursor:not-allowed}
   color:var(--pink-deep);min-height:22px;line-height:1.6;
 }
 .gate-sign{
-  margin-top:22px;padding-top:14px;
+  margin-top:20px;padding-top:13px;
   border-top:1px dashed var(--pink-line);
-  text-align:right;font-size:12.5px;font-style:italic;
-  color:#b8a2ab;letter-spacing:.4px;
+  text-align:center;font-size:12px;
+  color:#b8a2ab;letter-spacing:.5px;
 }
 @keyframes shake{
   0%,100%{transform:translateX(0)}
@@ -233,6 +252,35 @@ input[type=range]:disabled{cursor:not-allowed}
 }
 .shake{animation:shake .42s ease}
 
+/* ================= 谢谢过渡 ================= */
+#thanks{
+  position:fixed;inset:0;z-index:99999;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:linear-gradient(160deg,#ffd9e6 0%,#fff6f9 55%,#ffe9f1 100%);
+  opacity:0;pointer-events:none;
+  transition:opacity .45s ease;
+}
+#thanks.show{opacity:1;pointer-events:auto}
+.thanks-heart{
+  color:var(--pink);margin-bottom:14px;
+  animation:beat 1.05s ease-in-out infinite;
+  filter:drop-shadow(0 6px 16px rgba(255,143,177,.55));
+}
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  45%{transform:scale(1.16)}
+}
+.thanks-cn{
+  font-size:34px;font-weight:800;letter-spacing:8px;
+  color:var(--pink-deep);text-indent:8px;
+}
+.thanks-en{
+  margin-top:6px;font-size:14px;font-style:italic;
+  letter-spacing:1.2px;color:var(--pink-dark);
+  font-family:Georgia,"Times New Roman",serif;
+}
+
 /* ================= 手机适配 ================= */
 @media (max-width:620px){
   #bar{
@@ -242,6 +290,7 @@ input[type=range]:disabled{cursor:not-allowed}
   #bar button{width:100%;padding:10px 4px;font-size:13px}
   #pick{grid-column:1 / -1}
   #bar label{grid-column:1 / -1;font-size:13.5px;gap:8px}
+  #drophint{grid-column:1 / -1;padding:9px 10px;font-size:12px}
   #msg{grid-column:1 / -1;text-align:center}
 
   .row{
@@ -270,8 +319,9 @@ input[type=range]:disabled{cursor:not-allowed}
   .cfgft button{flex:1;padding:9px 10px;font-size:12.5px}
 
   #top{right:16px;bottom:18px;width:46px;height:46px;min-width:46px}
-  .gate-card{padding:28px 20px 20px}
+  .gate-card{padding:26px 20px 20px}
   .gate-card h2{font-size:18.5px}
+  .thanks-cn{font-size:30px;letter-spacing:6px}
 }
 </style>
 </head>
@@ -280,14 +330,36 @@ input[type=range]:disabled{cursor:not-allowed}
 <!-- ================= 进门提问 ================= -->
 <div id="gate">
   <div class="gate-card">
+    <div class="gate-crown">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+        <path d="M2.6 19.3h18.8" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" fill="none"/>
+        <path d="M3.5 18.3 2.2 7.6l5.5 4.2L12 4.4l4.3 7.4 5.5-4.2-1.3 10.7H3.5z"
+              fill="currentColor"/>
+      </svg>
+    </div>
     <h2>我是不是全世界最棒的宝宝呀？</h2>
     <div class="gate-en">Am I the fairest of them all?</div>
+    <div class="gate-by">— a certain very smug lady</div>
     <div class="gate-sub">回答「是」或「当然」即可进入</div>
     <input id="gateIn" type="text" placeholder="在这里回答…" autocomplete="off">
     <button id="gateBtn">确定</button>
     <div id="gateMsg"></div>
-    <div class="gate-sign">—— 某位洋洋得意的女士</div>
+    <div class="gate-sign">本问题的最终解释权归她所有</div>
   </div>
+</div>
+
+<!-- ================= 谢谢过渡 ================= -->
+<div id="thanks" hidden>
+  <div class="thanks-heart">
+    <svg viewBox="0 0 24 24" width="44" height="44" aria-hidden="true">
+      <path d="M12 21s-7.5-4.6-9.4-9.1C1.1 8.3 3.2 4.8 6.7 4.4c2-.2 3.9.9 5.3 2.7
+               1.4-1.8 3.3-2.9 5.3-2.7 3.5.4 5.6 3.9 4.1 7.5C19.5 16.4 12 21 12 21z"
+            fill="currentColor"/>
+    </svg>
+  </div>
+  <div class="thanks-cn">谢谢</div>
+  <div class="thanks-en">Thank You</div>
 </div>
 
 <!-- ================= 顶部工具栏 ================= -->
@@ -305,6 +377,7 @@ input[type=range]:disabled{cursor:not-allowed}
     <span class="vn" id="mv">100%</span>
   </label>
   <span id="msg"></span>
+  <div id="drophint">把音频文件拖到这里也可以（整个页面都能接）</div>
 </div>
 
 <!-- ================= 导入导出面板：默认隐藏 ================= -->
@@ -320,7 +393,6 @@ input[type=range]:disabled{cursor:not-allowed}
   </div>
 </div>
 
-<div id="drop">把音频文件拖到这里也可以</div>
 <div id="list"></div>
 
 <button id="top" title="回到顶部">
@@ -334,8 +406,8 @@ input[type=range]:disabled{cursor:not-allowed}
 
 <script>
 var KEY   = "multiAudio.v5";
-var DEF   = 0.25;      /* 默认音量 25% */
-var QUICK = 0.05;      /* 「5%」快捷按钮 */
+var DEF   = 0.25;
+var QUICK = 0.05;
 var ASK_ON_START = true;
 
 var tracks = [];
@@ -364,22 +436,31 @@ function syncLockAll(){
   btn.textContent = all ? "🔓 全部解锁" : "🔒 全部锁定";
 }
 
-/* ================= 进门提问 ================= */
+/* ================= 进门提问 + 谢谢过渡 ================= */
 var ANSWERS = ["是", "当然", "当然是", "你当然是"];
 
 function gatePass(){
   var v = (($("gateIn").value || "") + "")
     .replace(/[\s\u3000，。！!？?~～.、,]/g, "");
-  for (var i = 0; i < ANSWERS.length; i++) {
-    if (v === ANSWERS[i]) return true;
-  }
+  for (var i = 0; i < ANSWERS.length; i++) { if (v === ANSWERS[i]) return true; }
   return false;
+}
+
+function showThanks(){
+  var t = $("thanks");
+  t.hidden = false;
+  setTimeout(function(){ t.classList.add("show"); }, 20);
+  setTimeout(function(){
+    t.classList.remove("show");
+    setTimeout(function(){ t.hidden = true; }, 500);
+  }, 1700);
 }
 
 $("gateBtn").onclick = function(){
   if (gatePass()) {
     $("gate").classList.add("hide");
     $("gateMsg").textContent = "";
+    showThanks();
   } else {
     $("gateMsg").textContent = "你等着，我这就顺着网线过来找你 🔌";
     var card = document.querySelector(".gate-card");
@@ -529,12 +610,21 @@ function addFiles(fs){
 $("pick").onclick = function(){ $("f").click(); };
 $("f").onchange = function(e){ addFiles(e.target.files); e.target.value = ""; };
 
-var drop = $("drop");
-drop.ondragover = function(e){ e.preventDefault(); };
-drop.ondrop = function(e){
+/* 全页面接收拖拽 */
+document.addEventListener("dragover", function(e){
   e.preventDefault();
-  if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
-};
+  $("drophint").classList.add("hot");
+});
+document.addEventListener("dragleave", function(e){
+  if (e.relatedTarget === null) $("drophint").classList.remove("hot");
+});
+document.addEventListener("drop", function(e){
+  e.preventDefault();
+  $("drophint").classList.remove("hot");
+  if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+    addFiles(e.dataTransfer.files);
+  }
+});
 
 $("play").onclick = function(){
   for (var i = 0; i < tracks.length; i++) {
