@@ -1,4 +1,4 @@
-const CACHE = "multi-audio-v5";
+const CACHE = "multi-audio-v6";
 
 const FILES = [
   "./",
