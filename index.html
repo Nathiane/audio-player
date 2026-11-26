@@ -9,9 +9,12 @@
 <title>My Playlist</title>
 <style>
 :root{
-  --pink:#ff8fb1;--pink-dark:#f4688f;--pink-deep:#e14e78;
-  --pink-soft:#fff6f9;--pink-line:#ffd8e4;
-  --ink:#3a3338;--muted:#a09096;
+  --pink:#ff8fb1;
+  --pink-dark:#f4688f;
+  --pink-deep:#e14e78;
+  --pink-soft:#fff6f9;
+  --pink-line:#ffd8e4;
+  --ink:#3a3338;
 }
 *{box-sizing:border-box}
 
@@ -20,7 +23,8 @@ body{
   margin:0 auto;max-width:1180px;
   padding:clamp(18px,3.2vw,40px) clamp(16px,3.6vw,48px) clamp(32px,5vw,64px);
   background:#ffffff;color:var(--ink);
-  line-height:1.55;-webkit-font-smoothing:antialiased;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
   -webkit-tap-highlight-color:transparent;
 }
 
@@ -51,32 +55,36 @@ button.main{
 }
 button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
 
-#install{border-color:var(--pink);color:var(--pink-deep);font-weight:700}
 #lockall.on{background:var(--pink);border-color:var(--pink);color:#fff}
 #lockall.on:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
 
 .pbtn,.lk,.dl{
   width:38px;height:38px;min-width:38px;padding:0;
   display:flex;align-items:center;justify-content:center;
-  border-radius:50%;background:#fff;
-  border:1.5px solid var(--pink-line);color:var(--pink-dark);
+  border-radius:50%;
+  background:#fff;border:1.5px solid var(--pink-line);
+  color:var(--pink-dark);
   transition:all .16s ease;flex:none;
 }
 .lk,.dl{width:34px;height:34px;min-width:34px}
 .pbtn svg,.lk svg,.dl svg{display:block}
+
 .pbtn:hover{background:var(--pink);border-color:var(--pink);color:#fff;
   transform:scale(1.07);box-shadow:0 3px 10px rgba(255,143,177,.45)}
 .pbtn:active{transform:scale(.94)}
+
 .lk.on{background:var(--pink);border-color:var(--pink);color:#fff}
 .lk:hover{background:var(--pink-soft)}
 .lk.on:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
+
 .dl:hover{background:#fff0f2;border-color:#ffb3c2;color:#ec3f6a}
 .dl:active{transform:scale(.92)}
 
 button.q5{
   padding:6px 9px;font-size:12px;font-weight:700;line-height:1;
-  min-width:46px;border-radius:999px;background:#fff;
-  color:var(--pink-dark);border:1.5px solid var(--pink-line);flex:none;
+  min-width:46px;border-radius:999px;
+  background:#fff;color:var(--pink-dark);
+  border:1.5px solid var(--pink-line);flex:none;
 }
 button.q5:hover{background:var(--pink-soft);border-color:var(--pink)}
 
@@ -85,48 +93,33 @@ button.q5:hover{background:var(--pink-soft);border-color:var(--pink)}
   border:2px dashed var(--pink-line);border-radius:18px;
   padding:clamp(22px,3vw,34px);text-align:center;
   color:var(--pink-dark);font-size:14px;
-  background:var(--pink-soft);margin-bottom:18px;
-}
-
-/* ================= 导入导出面板 ================= */
-#cfgbox{
-  margin-bottom:18px;padding:14px;
-  border:1.5px solid var(--pink-line);border-radius:16px;
   background:var(--pink-soft);
+  margin-bottom:18px;
 }
-.cfghd{
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:13.5px;font-weight:700;color:var(--pink-deep);
-  margin-bottom:10px;
-}
-.cfghd button{padding:6px 14px;font-size:12.5px}
-#cfgbox textarea{
-  width:100%;height:96px;margin:0;
-  background:#fff;color:var(--ink);
-  border:1.5px solid var(--pink-line);border-radius:12px;
-  padding:11px;font-size:12px;
-  font-family:ui-monospace,Consolas,monospace;resize:vertical;
-}
-#cfgbox textarea:focus{outline:none;border-color:var(--pink)}
-.cfgft{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-.cfgft button{font-size:13px;padding:8px 16px}
-[hidden]{display:none !important}
 
 /* ================= 列表 ================= */
 #list{margin-top:4px}
+
 .row{
   display:grid;
   grid-template-columns:22px minmax(0,1fr) 38px 132px 50px 46px 34px 34px;
   gap:12px;align-items:center;
-  padding:12px 14px;border-bottom:1px solid #fdeef3;
-  border-radius:12px;transition:background .12s;
+  padding:12px 14px;
+  border-bottom:1px solid #fdeef3;
+  border-radius:12px;
+  transition:background .12s;
 }
 .row:hover{background:var(--pink-soft)}
-.name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
-  font-size:14.5px;color:var(--ink)}
 
-input[type=checkbox]{accent-color:var(--pink);width:18px;height:18px;
-  cursor:pointer;flex:none}
+.name{
+  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+  font-size:14.5px;color:var(--ink);
+}
+
+input[type=checkbox]{
+  accent-color:var(--pink);
+  width:18px;height:18px;cursor:pointer;flex:none;
+}
 
 input[type=range]{
   -webkit-appearance:none;appearance:none;
@@ -144,30 +137,86 @@ input[type=range]::-moz-range-thumb{
 }
 input[type=range]:disabled{cursor:not-allowed}
 
-.vn{width:48px;text-align:right;font-size:12.5px;font-weight:700;
+.vn{
+  width:48px;text-align:right;font-size:12.5px;font-weight:700;
   color:var(--pink-dark);font-family:ui-monospace,Consolas,monospace;
-  cursor:pointer;flex:none}
+  cursor:pointer;flex:none;
+}
 .vn:hover{color:var(--pink-deep);text-decoration:underline}
 
 #msg{font-size:13px;color:var(--pink-dark);font-weight:600}
 
-#foot{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-#foot button{font-size:13px;padding:9px 16px}
+/* ================= 导出/导入折叠区 ================= */
+#ioBox{display:none;margin-top:18px}
+#ioBox.show{display:block}
+
+textarea{
+  width:100%;height:92px;
+  background:#fff;color:var(--ink);
+  border:1.5px solid var(--pink-line);border-radius:14px;
+  padding:12px;font-size:12px;font-family:ui-monospace,Consolas,monospace;
+  resize:vertical;
+}
+textarea:focus{outline:none;border-color:var(--pink)}
 ::placeholder{color:#d9c5cd}
 
-/* ================= 悬浮回到顶部 ================= */
-#top{
-  position:fixed;right:20px;bottom:24px;z-index:60;
-  width:50px;height:50px;min-width:50px;padding:0;
-  border-radius:50%;border:none;
+/* ================= 返回顶部 ================= */
+#topBtn{
+  position:fixed;right:24px;bottom:28px;z-index:900;
+  width:48px;height:48px;min-width:48px;padding:0;
   display:none;align-items:center;justify-content:center;
-  background:var(--pink);color:#fff;
-  box-shadow:0 8px 22px rgba(255,143,177,.55);
-  transition:transform .16s ease, opacity .2s ease;
+  border-radius:50%;
+  background:var(--pink);border:1.5px solid var(--pink);color:#fff;
+  box-shadow:0 8px 24px rgba(255,143,177,.5);
 }
-#top.show{display:flex}
-#top:hover{background:var(--pink-dark);transform:translateY(-2px)}
-#top:active{transform:scale(.92)}
+#topBtn.show{display:flex}
+#topBtn:hover{background:var(--pink-dark);border-color:var(--pink-dark);transform:scale(1.06)}
+
+/* ================= 进门提问 ================= */
+#gate{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  background:linear-gradient(160deg,#ffd9e6 0%,#fff6f9 55%,#ffe9f1 100%);
+}
+#gate.hide{display:none}
+.gate-card{
+  width:100%;max-width:430px;
+  background:#fff;border:1.5px solid var(--pink-line);
+  border-radius:26px;padding:30px 26px;
+  box-shadow:0 18px 50px rgba(255,143,177,.35);
+  text-align:center;
+}
+.gate-card h2{
+  font-size:19px;margin:0 0 6px;color:var(--ink);
+  line-height:1.55;font-weight:700;
+}
+.gate-sub{font-size:12.5px;color:#b39aa4;margin-bottom:20px}
+#gateIn{
+  width:100%;padding:14px 16px;font-size:16px;
+  border:1.5px solid var(--pink-line);border-radius:14px;
+  background:#fff;color:var(--ink);text-align:center;
+  font-family:inherit;
+}
+#gateIn:focus{outline:none;border-color:var(--pink);
+  box-shadow:0 0 0 4px rgba(255,143,177,.18)}
+#gateBtn{
+  width:100%;margin-top:14px;padding:14px;font-size:16px;
+  background:var(--pink);border-color:var(--pink);color:#fff;
+  box-shadow:0 8px 22px rgba(255,143,177,.5);
+}
+#gateMsg{
+  margin-top:16px;font-size:14px;font-weight:700;
+  color:var(--pink-deep);min-height:22px;line-height:1.6;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-9px)}
+  40%{transform:translateX(9px)}
+  60%{transform:translateX(-6px)}
+  80%{transform:translateX(6px)}
+}
+.shake{animation:shake .42s ease}
 
 /* ================= 手机适配 ================= */
 @media (max-width:620px){
@@ -177,7 +226,6 @@ input[type=range]:disabled{cursor:not-allowed}
   }
   #bar button{width:100%;padding:10px 4px;font-size:13px}
   #pick{grid-column:1 / -1}
-  #install{grid-column:1 / -1}
   #bar label{grid-column:1 / -1;font-size:13.5px;gap:8px}
   #msg{grid-column:1 / -1;text-align:center}
 
@@ -188,29 +236,44 @@ input[type=range]:disabled{cursor:not-allowed}
       "pb vo vn q5 lk";
     gap:9px 8px;padding:12px 10px;
   }
-  .cb{grid-area:cb}.nm{grid-area:nm}.pb{grid-area:pb}
-  .vo{grid-area:vo}.vn{grid-area:vn}.q5{grid-area:q5}
+  .cb{grid-area:cb}
+  .nm{grid-area:nm}
+  .pb{grid-area:pb}
+  .vo{grid-area:vo}
+  .vn{grid-area:vn}
+  .q5{grid-area:q5}
   .lk{grid-area:lk;justify-self:end}
   .dl{grid-area:dl;justify-self:end}
 
   .name{
-    white-space:normal;word-break:break-all;line-height:1.38;
-    font-size:14px;display:-webkit-box;-webkit-line-clamp:2;
-    -webkit-box-orient:vertical;overflow:hidden;
+    white-space:normal;word-break:break-all;line-height:1.38;font-size:14px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    overflow:hidden;
   }
   #list .row input[type=range]{width:100%;min-width:0}
   .vn{width:44px;font-size:12px}
   button.q5{min-width:42px;padding:6px 7px;font-size:11.5px}
-  #foot button{width:100%}
-  #top{right:16px;bottom:18px;width:46px;height:46px;min-width:46px}
+
+  #topBtn{right:16px;bottom:18px;width:46px;height:46px;min-width:46px}
+  .gate-card{padding:26px 20px}
 }
 </style>
 </head>
 <body>
 
+<!-- ================= 进门提问 ================= -->
+<div id="gate">
+  <div class="gate-card">
+    <h2>我是不是全世界最棒的宝宝！</h2>
+    <div class="gate-sub">回答「是」或「当然」即可进入</div>
+    <input id="gateIn" type="text" placeholder="在这里回答…" autocomplete="off">
+    <button id="gateBtn">确定</button>
+    <div id="gateMsg"></div>
+  </div>
+</div>
+
 <div id="bar">
   <button id="pick" class="main">选择文件</button>
-  <button id="install">⤓ 安装到桌面</button>
   <button id="play">▶ 播放选中</button>
   <button id="stop">■ 全部停止</button>
   <button id="reset">↺ 恢复 25%</button>
@@ -225,39 +288,30 @@ input[type=range]:disabled{cursor:not-allowed}
   <span id="msg"></span>
 </div>
 
-<!-- 导入导出面板：默认隐藏 -->
-<div id="cfgbox" hidden>
-  <div class="cfghd">
-    <span>设置导入 / 导出</span>
-    <button id="cfgclose">收起</button>
-  </div>
-  <textarea id="cfg" placeholder="导出的内容会出现在这里；导入时把文本粘进来，再点「应用导入」"></textarea>
-  <div class="cfgft">
-    <button id="cfgapply" class="main">应用导入</button>
-    <button id="cfgcopy">复制框里的内容</button>
-  </div>
-</div>
-
 <div id="drop">把音频文件拖到这里也可以</div>
 <div id="list"></div>
 
-<div id="foot">
-  <button id="dlhtml">⤓ 下载播放器文件（.html）</button>
+<div id="ioBox">
+  <textarea id="cfg" placeholder="设置文本会出现在这里（导出/导入用）"></textarea>
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <button id="ioHide">收起</button>
+  </div>
 </div>
 
-<button id="top" title="回到顶部">
-  <svg viewBox="0 0 24 24" width="21" height="21">
-    <path d="M12 19V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="2"
+<input type="file" id="f" multiple accept="audio/*" hidden>
+
+<button id="topBtn" title="回到顶部">
+  <svg viewBox="0 0 24 24" width="18" height="18">
+    <path d="M12 19.5V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="2.2"
           fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </button>
 
-<input type="file" id="f" multiple accept="audio/*" hidden>
-
 <script>
-var KEY   = "multiAudio.v5";
-var DEF   = 0.25;      /* 默认音量 25% */
-var QUICK = 0.05;      /* 「5%」快捷按钮 */
+var KEY      = "multiAudio.v5";
+var DEF      = 0.25;      /* 默认音量 25% */
+var QUICK    = 0.05;      /* 「5%」快捷按钮 */
+var ASK_ON_START = true;  /* 进门提问开关，false 就不问了 */
 
 var tracks = [];
 var $ = function(id){ return document.getElementById(id); };
@@ -285,6 +339,66 @@ function syncLockAll(){
   btn.textContent = all ? "🔓 全部解锁" : "🔒 全部锁定";
 }
 
+/* ================= 进门提问 ================= */
+var ANSWERS = ["是", "当然", "当然是", "你当然是"];
+
+function gatePass(){
+  var v = (($("gateIn").value || "") + "")
+    .replace(/[\s\u3000，。！!？?~～.、,]/g, "");
+  for (var i = 0; i < ANSWERS.length; i++) {
+    if (v === ANSWERS[i]) return true;
+  }
+  return false;
+}
+
+$("gateBtn").onclick = function(){
+  if (gatePass()) {
+    $("gate").classList.add("hide");
+    $("gateMsg").textContent = "";
+  } else {
+    $("gateMsg").textContent = "你等着，我这就顺着网线过来找你 🔌";
+    var card = document.querySelector(".gate-card");
+    card.classList.remove("shake");
+    void card.offsetWidth;
+    card.classList.add("shake");
+    $("gateIn").value = "";
+    $("gateIn").focus();
+  }
+};
+$("gateIn").addEventListener("keydown", function(e){
+  if (e.key === "Enter") $("gateBtn").click();
+});
+
+if (!ASK_ON_START) $("gate").classList.add("hide");
+
+/* ================= 防误刷新 ================= */
+window.addEventListener("beforeunload", function(e){
+  if (tracks.length > 0) {
+    e.preventDefault();
+    e.returnValue = "列表里还有音频，确定要离开吗？";
+    return e.returnValue;
+  }
+});
+
+/* ================= 返回顶部 ================= */
+window.addEventListener("scroll", function(){
+  $("topBtn").classList.toggle("show", window.scrollY > 260);
+}, { passive: true });
+
+$("topBtn").onclick = function(){
+  try { window.scrollTo({ top: 0, behavior: "smooth" }); }
+  catch(err){ window.scrollTo(0, 0); }
+};
+
+/* ================= 导出/导入折叠 ================= */
+function openIO(){
+  $("ioBox").classList.add("show");
+}
+$("ioHide").onclick = function(){
+  $("ioBox").classList.remove("show");
+};
+
+/* ================= 添加文件 ================= */
 function addFiles(fs){
   var cfg = loadCfg();
   for (var i = 0; i < fs.length; i++) {
@@ -349,7 +463,8 @@ function addFiles(fs){
 
       q5.onclick = function(){
         if (vo.disabled) return;
-        vo.value = QUICK; vo.oninput();
+        vo.value = QUICK;
+        vo.oninput();
       };
 
       function setLock(on){
@@ -427,7 +542,8 @@ $("reset").onclick = function(){
     t.n.textContent = Math.round(DEF * 100) + "%";
     paint(t.v);
     t.a.volume = Math.min(1, DEF * $("master").value);
-    c.vol[t.id] = DEF; n++;
+    c.vol[t.id] = DEF;
+    n++;
   }
   saveCfg(c);
   $("msg").textContent = "已恢复 " + n + " 条到 " + Math.round(DEF * 100) + "%（锁定的不动）";
@@ -464,12 +580,7 @@ $("mv").onclick = function(){
   $("master").oninput();
 };
 
-/* ================= 导入 / 导出面板 ================= */
-function openCfg(){
-  $("cfgbox").hidden = false;
-  try { $("cfgbox").scrollIntoView({behavior:"smooth", block:"center"}); } catch(e){}
-}
-
+/* 导出：自动展开并填入 */
 $("exp").onclick = function(){
   var o = { vol:{}, lock:{} };
   for (var i = 0; i < tracks.length; i++) {
@@ -478,28 +589,20 @@ $("exp").onclick = function(){
   }
   saveCfg(o);
   var t = JSON.stringify(o);
+  openIO();
   $("cfg").value = t;
-  openCfg();
   try { navigator.clipboard.writeText(t); $("msg").textContent = "已导出并复制"; }
   catch(e){ $("msg").textContent = "已导出，请手动复制"; }
 };
 
+/* 导入：第一次点先展开 */
 $("imp").onclick = function(){
-  openCfg();
-  $("msg").textContent = "把文本粘进框里，再点「应用导入」";
-  try { $("cfg").focus(); } catch(e){}
-};
-
-$("cfgclose").onclick = function(){ $("cfgbox").hidden = true; };
-
-$("cfgcopy").onclick = function(){
-  var t = $("cfg").value;
-  if (!t) { $("msg").textContent = "框里是空的"; return; }
-  try { navigator.clipboard.writeText(t); $("msg").textContent = "已复制"; }
-  catch(e){ $("msg").textContent = "复制失败，请手动选中复制"; }
-};
-
-$("cfgapply").onclick = function(){
+  if (!$("ioBox").classList.contains("show")) {
+    openIO();
+    $("cfg").focus();
+    $("msg").textContent = "把设置文本粘贴进去，再点一次「导入」";
+    return;
+  }
   try {
     var o = JSON.parse($("cfg").value);
     saveCfg(o);
@@ -513,69 +616,8 @@ $("cfgapply").onclick = function(){
       }
     }
     $("msg").textContent = "已导入";
-    $("cfgbox").hidden = true;
-  } catch(e){
-    $("msg").textContent = "导入失败：文本格式不对";
-  }
+  } catch(e){ $("msg").textContent = "导入失败：文本格式不对"; }
 };
-
-/* ================= 安装 ================= */
-var deferredPrompt = null;
-
-window.addEventListener("beforeinstallprompt", function(e){
-  e.preventDefault();
-  deferredPrompt = e;
-});
-
-window.addEventListener("appinstalled", function(){
-  deferredPrompt = null;
-  $("msg").textContent = "已安装";
-});
-
-$("install").onclick = function(){
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(function(c){
-      $("msg").textContent = (c && c.outcome === "accepted") ? "正在安装…" : "已取消安装";
-      deferredPrompt = null;
-    }).catch(function(){ deferredPrompt = null; });
-  } else {
-    $("msg").textContent = "请用浏览器菜单里的「安装」或「添加到主屏幕」";
-  }
-};
-
-/* ================= 下载播放器文件 ================= */
-$("dlhtml").onclick = function(){
-  fetch("./index.html").then(function(r){ return r.text(); }).then(function(txt){
-    var blob = new Blob([txt], { type:"text/html;charset=utf-8" });
-    var url  = URL.createObjectURL(blob);
-    var a = document.createElement("a");
-    a.href = url; a.download = "My Playlist.html";
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 8000);
-    $("msg").textContent = "已下载到本机";
-  }).catch(function(){ $("msg").textContent = "下载失败，请联网后再试"; });
-};
-
-/* ================= 回到顶部 ================= */
-window.addEventListener("scroll", function(){
-  if (window.scrollY > 200) $("top").classList.add("show");
-  else $("top").classList.remove("show");
-}, { passive: true });
-
-$("top").onclick = function(){
-  try { window.scrollTo({ top:0, behavior:"smooth" }); }
-  catch(e){ window.scrollTo(0, 0); }
-};
-
-/* ================= 离开前拦截 ================= */
-window.addEventListener("beforeunload", function(e){
-  if (tracks.length > 0) {
-    e.preventDefault();
-    e.returnValue = "";
-    return "";
-  }
-});
 
 paint($("master"));
 syncLockAll();
