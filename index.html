@@ -17,6 +17,7 @@
   --ink:#3a3338;
 }
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 
 body{
   font-family:system-ui,"HarmonyOS Sans",sans-serif;
@@ -88,6 +89,30 @@ button.q5{
 }
 button.q5:hover{background:var(--pink-soft);border-color:var(--pink)}
 
+/* ================= 导入导出面板 ================= */
+#cfgbox{
+  margin-bottom:18px;padding:16px 18px;
+  border:1.5px solid var(--pink-line);border-radius:16px;
+  background:var(--pink-soft);
+  box-shadow:0 4px 18px rgba(255,143,177,.12);
+}
+.cfghd{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13.5px;font-weight:700;color:var(--pink-deep);
+  margin-bottom:10px;letter-spacing:.3px;
+}
+.cfghd button{padding:6px 14px;font-size:12.5px}
+#cfgbox textarea{
+  width:100%;height:96px;margin:0;
+  background:#fff;color:var(--ink);
+  border:1.5px solid var(--pink-line);border-radius:12px;
+  padding:11px;font-size:12px;
+  font-family:ui-monospace,Consolas,monospace;resize:vertical;
+}
+#cfgbox textarea:focus{outline:none;border-color:var(--pink)}
+.cfgft{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.cfgft button{font-size:13px;padding:8px 16px}
+
 /* ================= 拖拽区 ================= */
 #drop{
   border:2px dashed var(--pink-line);border-radius:18px;
@@ -99,27 +124,19 @@ button.q5:hover{background:var(--pink-soft);border-color:var(--pink)}
 
 /* ================= 列表 ================= */
 #list{margin-top:4px}
-
 .row{
   display:grid;
   grid-template-columns:22px minmax(0,1fr) 38px 132px 50px 46px 34px 34px;
   gap:12px;align-items:center;
-  padding:12px 14px;
-  border-bottom:1px solid #fdeef3;
-  border-radius:12px;
-  transition:background .12s;
+  padding:12px 14px;border-bottom:1px solid #fdeef3;
+  border-radius:12px;transition:background .12s;
 }
 .row:hover{background:var(--pink-soft)}
+.name{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+  font-size:14.5px;color:var(--ink)}
 
-.name{
-  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
-  font-size:14.5px;color:var(--ink);
-}
-
-input[type=checkbox]{
-  accent-color:var(--pink);
-  width:18px;height:18px;cursor:pointer;flex:none;
-}
+input[type=checkbox]{accent-color:var(--pink);width:18px;height:18px;
+  cursor:pointer;flex:none}
 
 input[type=range]{
   -webkit-appearance:none;appearance:none;
@@ -137,40 +154,27 @@ input[type=range]::-moz-range-thumb{
 }
 input[type=range]:disabled{cursor:not-allowed}
 
-.vn{
-  width:48px;text-align:right;font-size:12.5px;font-weight:700;
+.vn{width:48px;text-align:right;font-size:12.5px;font-weight:700;
   color:var(--pink-dark);font-family:ui-monospace,Consolas,monospace;
-  cursor:pointer;flex:none;
-}
+  cursor:pointer;flex:none}
 .vn:hover{color:var(--pink-deep);text-decoration:underline}
 
 #msg{font-size:13px;color:var(--pink-dark);font-weight:600}
-
-/* ================= 导出/导入折叠区 ================= */
-#ioBox{display:none;margin-top:18px}
-#ioBox.show{display:block}
-
-textarea{
-  width:100%;height:92px;
-  background:#fff;color:var(--ink);
-  border:1.5px solid var(--pink-line);border-radius:14px;
-  padding:12px;font-size:12px;font-family:ui-monospace,Consolas,monospace;
-  resize:vertical;
-}
-textarea:focus{outline:none;border-color:var(--pink)}
 ::placeholder{color:#d9c5cd}
 
-/* ================= 返回顶部 ================= */
-#topBtn{
-  position:fixed;right:24px;bottom:28px;z-index:900;
-  width:48px;height:48px;min-width:48px;padding:0;
+/* ================= 悬浮回到顶部 ================= */
+#top{
+  position:fixed;right:24px;bottom:28px;z-index:60;
+  width:50px;height:50px;min-width:50px;padding:0;
+  border-radius:50%;border:none;
   display:none;align-items:center;justify-content:center;
-  border-radius:50%;
-  background:var(--pink);border:1.5px solid var(--pink);color:#fff;
-  box-shadow:0 8px 24px rgba(255,143,177,.5);
+  background:var(--pink);color:#fff;
+  box-shadow:0 8px 24px rgba(255,143,177,.55);
+  transition:transform .16s ease;
 }
-#topBtn.show{display:flex}
-#topBtn:hover{background:var(--pink-dark);border-color:var(--pink-dark);transform:scale(1.06)}
+#top.show{display:flex}
+#top:hover{background:var(--pink-dark);transform:translateY(-2px)}
+#top:active{transform:scale(.92)}
 
 /* ================= 进门提问 ================= */
 #gate{
@@ -181,17 +185,22 @@ textarea:focus{outline:none;border-color:var(--pink)}
 }
 #gate.hide{display:none}
 .gate-card{
-  width:100%;max-width:430px;
+  width:100%;max-width:440px;
   background:#fff;border:1.5px solid var(--pink-line);
-  border-radius:26px;padding:30px 26px;
+  border-radius:26px;padding:34px 28px 26px;
   box-shadow:0 18px 50px rgba(255,143,177,.35);
   text-align:center;
 }
 .gate-card h2{
-  font-size:19px;margin:0 0 6px;color:var(--ink);
-  line-height:1.55;font-weight:700;
+  font-size:20px;margin:0 0 4px;color:var(--ink);
+  line-height:1.55;font-weight:700;letter-spacing:.3px;
 }
-.gate-sub{font-size:12.5px;color:#b39aa4;margin-bottom:20px}
+.gate-en{
+  font-size:13px;font-style:italic;letter-spacing:.4px;
+  color:var(--pink-dark);margin-bottom:16px;
+  font-family:Georgia,"Times New Roman",serif;
+}
+.gate-sub{font-size:12.5px;color:#b8a2ab;margin-bottom:18px}
 #gateIn{
   width:100%;padding:14px 16px;font-size:16px;
   border:1.5px solid var(--pink-line);border-radius:14px;
@@ -206,8 +215,14 @@ textarea:focus{outline:none;border-color:var(--pink)}
   box-shadow:0 8px 22px rgba(255,143,177,.5);
 }
 #gateMsg{
-  margin-top:16px;font-size:14px;font-weight:700;
+  margin-top:14px;font-size:14px;font-weight:700;
   color:var(--pink-deep);min-height:22px;line-height:1.6;
+}
+.gate-sign{
+  margin-top:22px;padding-top:14px;
+  border-top:1px dashed var(--pink-line);
+  text-align:right;font-size:12.5px;font-style:italic;
+  color:#b8a2ab;letter-spacing:.4px;
 }
 @keyframes shake{
   0%,100%{transform:translateX(0)}
@@ -236,26 +251,27 @@ textarea:focus{outline:none;border-color:var(--pink)}
       "pb vo vn q5 lk";
     gap:9px 8px;padding:12px 10px;
   }
-  .cb{grid-area:cb}
-  .nm{grid-area:nm}
-  .pb{grid-area:pb}
-  .vo{grid-area:vo}
-  .vn{grid-area:vn}
-  .q5{grid-area:q5}
+  .cb{grid-area:cb}.nm{grid-area:nm}.pb{grid-area:pb}
+  .vo{grid-area:vo}.vn{grid-area:vn}.q5{grid-area:q5}
   .lk{grid-area:lk;justify-self:end}
   .dl{grid-area:dl;justify-self:end}
 
   .name{
-    white-space:normal;word-break:break-all;line-height:1.38;font-size:14px;
-    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
-    overflow:hidden;
+    white-space:normal;word-break:break-all;line-height:1.38;
+    font-size:14px;display:-webkit-box;-webkit-line-clamp:2;
+    -webkit-box-orient:vertical;overflow:hidden;
   }
   #list .row input[type=range]{width:100%;min-width:0}
   .vn{width:44px;font-size:12px}
   button.q5{min-width:42px;padding:6px 7px;font-size:11.5px}
 
-  #topBtn{right:16px;bottom:18px;width:46px;height:46px;min-width:46px}
-  .gate-card{padding:26px 20px}
+  #cfgbox{padding:14px;border-radius:14px}
+  .cfghd{font-size:13px}
+  .cfgft button{flex:1;padding:9px 10px;font-size:12.5px}
+
+  #top{right:16px;bottom:18px;width:46px;height:46px;min-width:46px}
+  .gate-card{padding:28px 20px 20px}
+  .gate-card h2{font-size:18.5px}
 }
 </style>
 </head>
@@ -264,14 +280,17 @@ textarea:focus{outline:none;border-color:var(--pink)}
 <!-- ================= 进门提问 ================= -->
 <div id="gate">
   <div class="gate-card">
-    <h2>我是不是全世界最棒的宝宝！</h2>
+    <h2>我是不是全世界最棒的宝宝呀？</h2>
+    <div class="gate-en">Am I the fairest of them all?</div>
     <div class="gate-sub">回答「是」或「当然」即可进入</div>
     <input id="gateIn" type="text" placeholder="在这里回答…" autocomplete="off">
     <button id="gateBtn">确定</button>
     <div id="gateMsg"></div>
+    <div class="gate-sign">—— 某位洋洋得意的女士</div>
   </div>
 </div>
 
+<!-- ================= 顶部工具栏 ================= -->
 <div id="bar">
   <button id="pick" class="main">选择文件</button>
   <button id="play">▶ 播放选中</button>
@@ -288,30 +307,36 @@ textarea:focus{outline:none;border-color:var(--pink)}
   <span id="msg"></span>
 </div>
 
-<div id="drop">把音频文件拖到这里也可以</div>
-<div id="list"></div>
-
-<div id="ioBox">
-  <textarea id="cfg" placeholder="设置文本会出现在这里（导出/导入用）"></textarea>
-  <div style="display:flex;gap:8px;margin-top:10px">
-    <button id="ioHide">收起</button>
+<!-- ================= 导入导出面板：默认隐藏 ================= -->
+<div id="cfgbox" hidden>
+  <div class="cfghd">
+    <span>设置导入 / 导出</span>
+    <button id="cfgclose">收起</button>
+  </div>
+  <textarea id="cfg" placeholder="导出的内容会出现在这里；导入时把文本粘进来，再点「应用导入」"></textarea>
+  <div class="cfgft">
+    <button id="cfgapply" class="main">应用导入</button>
+    <button id="cfgcopy">复制框里的内容</button>
   </div>
 </div>
 
-<input type="file" id="f" multiple accept="audio/*" hidden>
+<div id="drop">把音频文件拖到这里也可以</div>
+<div id="list"></div>
 
-<button id="topBtn" title="回到顶部">
-  <svg viewBox="0 0 24 24" width="18" height="18">
-    <path d="M12 19.5V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="2.2"
+<button id="top" title="回到顶部">
+  <svg viewBox="0 0 24 24" width="20" height="20">
+    <path d="M12 19V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="2.1"
           fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </button>
 
+<input type="file" id="f" multiple accept="audio/*" hidden>
+
 <script>
-var KEY      = "multiAudio.v5";
-var DEF      = 0.25;      /* 默认音量 25% */
-var QUICK    = 0.05;      /* 「5%」快捷按钮 */
-var ASK_ON_START = true;  /* 进门提问开关，false 就不问了 */
+var KEY   = "multiAudio.v5";
+var DEF   = 0.25;      /* 默认音量 25% */
+var QUICK = 0.05;      /* 「5%」快捷按钮 */
+var ASK_ON_START = true;
 
 var tracks = [];
 var $ = function(id){ return document.getElementById(id); };
@@ -368,7 +393,6 @@ $("gateBtn").onclick = function(){
 $("gateIn").addEventListener("keydown", function(e){
   if (e.key === "Enter") $("gateBtn").click();
 });
-
 if (!ASK_ON_START) $("gate").classList.add("hide");
 
 /* ================= 防误刷新 ================= */
@@ -380,25 +404,17 @@ window.addEventListener("beforeunload", function(e){
   }
 });
 
-/* ================= 返回顶部 ================= */
+/* ================= 回到顶部 ================= */
 window.addEventListener("scroll", function(){
-  $("topBtn").classList.toggle("show", window.scrollY > 260);
+  $("top").classList.toggle("show", window.scrollY > 260);
 }, { passive: true });
 
-$("topBtn").onclick = function(){
+$("top").onclick = function(){
   try { window.scrollTo({ top: 0, behavior: "smooth" }); }
   catch(err){ window.scrollTo(0, 0); }
 };
 
-/* ================= 导出/导入折叠 ================= */
-function openIO(){
-  $("ioBox").classList.add("show");
-}
-$("ioHide").onclick = function(){
-  $("ioBox").classList.remove("show");
-};
-
-/* ================= 添加文件 ================= */
+/* ================= 添加音频 ================= */
 function addFiles(fs){
   var cfg = loadCfg();
   for (var i = 0; i < fs.length; i++) {
@@ -463,8 +479,7 @@ function addFiles(fs){
 
       q5.onclick = function(){
         if (vo.disabled) return;
-        vo.value = QUICK;
-        vo.oninput();
+        vo.value = QUICK; vo.oninput();
       };
 
       function setLock(on){
@@ -542,8 +557,7 @@ $("reset").onclick = function(){
     t.n.textContent = Math.round(DEF * 100) + "%";
     paint(t.v);
     t.a.volume = Math.min(1, DEF * $("master").value);
-    c.vol[t.id] = DEF;
-    n++;
+    c.vol[t.id] = DEF; n++;
   }
   saveCfg(c);
   $("msg").textContent = "已恢复 " + n + " 条到 " + Math.round(DEF * 100) + "%（锁定的不动）";
@@ -580,7 +594,12 @@ $("mv").onclick = function(){
   $("master").oninput();
 };
 
-/* 导出：自动展开并填入 */
+/* ================= 导入 / 导出面板 ================= */
+function openCfg(){
+  $("cfgbox").hidden = false;
+  try { $("cfgbox").scrollIntoView({ behavior:"smooth", block:"center" }); } catch(e){}
+}
+
 $("exp").onclick = function(){
   var o = { vol:{}, lock:{} };
   for (var i = 0; i < tracks.length; i++) {
@@ -589,20 +608,28 @@ $("exp").onclick = function(){
   }
   saveCfg(o);
   var t = JSON.stringify(o);
-  openIO();
   $("cfg").value = t;
+  openCfg();
   try { navigator.clipboard.writeText(t); $("msg").textContent = "已导出并复制"; }
   catch(e){ $("msg").textContent = "已导出，请手动复制"; }
 };
 
-/* 导入：第一次点先展开 */
 $("imp").onclick = function(){
-  if (!$("ioBox").classList.contains("show")) {
-    openIO();
-    $("cfg").focus();
-    $("msg").textContent = "把设置文本粘贴进去，再点一次「导入」";
-    return;
-  }
+  openCfg();
+  $("msg").textContent = "把文本粘进框里，再点「应用导入」";
+  try { $("cfg").focus(); } catch(e){}
+};
+
+$("cfgclose").onclick = function(){ $("cfgbox").hidden = true; };
+
+$("cfgcopy").onclick = function(){
+  var t = $("cfg").value;
+  if (!t) { $("msg").textContent = "框里是空的"; return; }
+  try { navigator.clipboard.writeText(t); $("msg").textContent = "已复制"; }
+  catch(e){ $("msg").textContent = "复制失败，请手动选中复制"; }
+};
+
+$("cfgapply").onclick = function(){
   try {
     var o = JSON.parse($("cfg").value);
     saveCfg(o);
@@ -616,7 +643,10 @@ $("imp").onclick = function(){
       }
     }
     $("msg").textContent = "已导入";
-  } catch(e){ $("msg").textContent = "导入失败：文本格式不对"; }
+    $("cfgbox").hidden = true;
+  } catch(e){
+    $("msg").textContent = "导入失败：文本格式不对";
+  }
 };
 
 paint($("master"));
