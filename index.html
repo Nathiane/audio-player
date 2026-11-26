@@ -56,7 +56,11 @@ button.main{
 }
 button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
 
-/* 圆形小图标按钮：播放 / 锁定 / 删除 */
+/* 全部锁定按钮：锁定态变实心粉 */
+#lockall.on{background:var(--pink);border-color:var(--pink);color:#fff}
+#lockall.on:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
+
+/* 圆形小图标按钮 */
 .pbtn,.lk,.dl{
   width:38px;height:38px;min-width:38px;padding:0;
   display:flex;align-items:center;justify-content:center;
@@ -72,14 +76,21 @@ button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
   transform:scale(1.07);box-shadow:0 3px 10px rgba(255,143,177,.45)}
 .pbtn:active{transform:scale(.94)}
 
-/* 锁定：已锁 = 实心粉 */
 .lk.on{background:var(--pink);border-color:var(--pink);color:#fff}
 .lk:hover{background:var(--pink-soft)}
 .lk.on:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
 
-/* 删除 */
 .dl:hover{background:#fff0f2;border-color:#ffb3c2;color:#ec3f6a}
 .dl:active{transform:scale(.92)}
+
+/* 5% 快捷按钮 */
+button.q5{
+  padding:6px 9px;font-size:12px;font-weight:700;line-height:1;
+  min-width:46px;border-radius:999px;
+  background:#fff;color:var(--pink-dark);
+  border:1.5px solid var(--pink-line);flex:none;
+}
+button.q5:hover{background:var(--pink-soft);border-color:var(--pink)}
 
 /* ================= 拖拽区 ================= */
 #drop{
@@ -95,7 +106,7 @@ button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
 
 .row{
   display:grid;
-  grid-template-columns:22px minmax(0,1fr) 38px 132px 50px 34px 34px;
+  grid-template-columns:22px minmax(0,1fr) 38px 132px 50px 46px 34px 34px;
   gap:12px;align-items:center;
   padding:12px 14px;
   border-bottom:1px solid #fdeef3;
@@ -109,13 +120,11 @@ button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
   font-size:14.5px;color:var(--ink);
 }
 
-/* ================= 复选框 ================= */
 input[type=checkbox]{
   accent-color:var(--pink);
   width:18px;height:18px;cursor:pointer;flex:none;
 }
 
-/* ================= 滑块 ================= */
 input[type=range]{
   -webkit-appearance:none;appearance:none;
   width:132px;height:8px;border-radius:999px;
@@ -132,7 +141,6 @@ input[type=range]::-moz-range-thumb{
 }
 input[type=range]:disabled{cursor:not-allowed}
 
-/* ================= 百分比 ================= */
 .vn{
   width:48px;text-align:right;font-size:12.5px;font-weight:700;
   color:var(--pink-dark);font-family:ui-monospace,Consolas,monospace;
@@ -155,7 +163,6 @@ textarea:focus{outline:none;border-color:var(--pink)}
 /* ================= 手机适配 ================= */
 @media (max-width:620px){
 
-  /* —— 顶部工具栏：3 列整齐排列 —— */
   #bar{
     display:grid;
     grid-template-columns:1fr 1fr 1fr;
@@ -163,23 +170,17 @@ textarea:focus{outline:none;border-color:var(--pink)}
     padding:12px;
     border-radius:16px;
   }
-  #bar button{
-    width:100%;padding:10px 4px;font-size:13px;
-  }
-  #bar label{
-    grid-column:1 / -1;
-    font-size:13.5px;
-    gap:8px;
-  }
+  #bar button{width:100%;padding:10px 4px;font-size:13px}
+  #pick{grid-column:1 / -1}
+  #bar label{grid-column:1 / -1;font-size:13.5px;gap:8px}
   #msg{grid-column:1 / -1;text-align:center}
 
-  /* —— 列表行：两行布局 —— */
   .row{
-    grid-template-columns:auto minmax(0,1fr) auto auto;
+    grid-template-columns:auto minmax(0,1fr) auto auto auto;
     grid-template-areas:
-      "cb nm dl dl"
-      "pb vo vn lk";
-    gap:9px 10px;
+      "cb nm dl dl dl"
+      "pb vo vn q5 lk";
+    gap:9px 8px;
     padding:12px 10px;
   }
   .cb{grid-area:cb}
@@ -187,10 +188,10 @@ textarea:focus{outline:none;border-color:var(--pink)}
   .pb{grid-area:pb}
   .vo{grid-area:vo}
   .vn{grid-area:vn}
+  .q5{grid-area:q5}
   .lk{grid-area:lk;justify-self:end}
   .dl{grid-area:dl;justify-self:end}
 
-  /* 文件名允许两行，超出才省略 */
   .name{
     white-space:normal;
     word-break:break-all;
@@ -203,6 +204,7 @@ textarea:focus{outline:none;border-color:var(--pink)}
   }
   #list .row input[type=range]{width:100%;min-width:0}
   .vn{width:44px;font-size:12px}
+  button.q5{min-width:42px;padding:6px 7px;font-size:11.5px}
 }
 </style>
 </head>
@@ -213,6 +215,7 @@ textarea:focus{outline:none;border-color:var(--pink)}
   <button id="play">▶ 播放选中</button>
   <button id="stop">■ 全部停止</button>
   <button id="reset">↺ 恢复 30%</button>
+  <button id="lockall">🔒 全部锁定</button>
   <button id="exp">导出</button>
   <button id="imp">导入</button>
   <label class="wide"><input type="checkbox" id="loop" checked> 循环播放</label>
@@ -231,6 +234,7 @@ textarea:focus{outline:none;border-color:var(--pink)}
 <script>
 var KEY = "multiAudio.v5";
 var DEF = 0.3;
+var QUICK = 0.05;                 /* 「5%」按钮的值，想改成 3% 就写 0.03 */
 var tracks = [];
 var $ = function(id){ return document.getElementById(id); };
 
@@ -246,6 +250,16 @@ function saveCfg(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e
 function paint(el){
   var p = Math.round(el.value * 100);
   el.style.background = "linear-gradient(to right,#ff8fb1 " + p + "%,#f3f0f1 " + p + "%)";
+}
+
+/* 同步「全部锁定」按钮的文字与状态 */
+function syncLockAll(){
+  var btn = $("lockall");
+  if (!tracks.length) { btn.classList.remove("on"); btn.textContent = "🔒 全部锁定"; return; }
+  var all = true;
+  for (var i = 0; i < tracks.length; i++) { if (!tracks[i].v.disabled) { all = false; break; } }
+  btn.classList.toggle("on", all);
+  btn.textContent = all ? "🔓 全部解锁" : "🔒 全部锁定";
 }
 
 function addFiles(fs){
@@ -275,6 +289,10 @@ function addFiles(fs){
       vn.className = "vn"; vn.textContent = Math.round(vo.value * 100) + "%";
       vn.title = "点这里可以直接输入数值";
       paint(vo);
+
+      var q5 = document.createElement("button");
+      q5.className = "q5"; q5.textContent = Math.round(QUICK * 100) + "%";
+      q5.title = "一键设为 " + Math.round(QUICK * 100) + "%";
 
       var lk = document.createElement("button");
       lk.className = "lk"; lk.title = "锁定这一条的音量";
@@ -306,16 +324,27 @@ function addFiles(fs){
         vo.oninput();
       };
 
+      /* ★ 5% 快捷键 */
+      q5.onclick = function(){
+        if (vo.disabled) return;
+        vo.value = QUICK;
+        vo.oninput();
+      };
+
       /* —— 锁定 —— */
       function setLock(on){
         vo.disabled = on;
         vo.style.opacity = on ? .45 : 1;
         vn.style.opacity = on ? .45 : 1;
         vn.style.pointerEvents = on ? "none" : "auto";
+        q5.style.opacity = on ? .4 : 1;
+        q5.style.pointerEvents = on ? "none" : "auto";
         lk.innerHTML = on ? ICON_LOCK : ICON_OPEN;
         lk.classList.toggle("on", on);
         var c = loadCfg(); c.lock = c.lock || {}; c.lock[id] = !!on; saveCfg(c);
+        syncLockAll();
       }
+      rec.setLock = setLock;
       lk.onclick = function(){ setLock(!vo.disabled); };
       setLock(!!(cfg.lock && cfg.lock[id]));
 
@@ -329,6 +358,7 @@ function addFiles(fs){
           if (tracks[z] === rec) { tracks.splice(z, 1); break; }
         }
         $("msg").textContent = "剩余 " + tracks.length + " 个";
+        syncLockAll();
       };
 
       bt.onclick = function(){ if (au.paused) { au.play(); } else { au.pause(); } };
@@ -337,13 +367,14 @@ function addFiles(fs){
       au.onerror = function(){ nm.textContent = file.name + "（无法播放）"; };
 
       row.appendChild(cb); row.appendChild(nm); row.appendChild(bt);
-      row.appendChild(vo); row.appendChild(vn); row.appendChild(lk);
-      row.appendChild(dl);
+      row.appendChild(vo); row.appendChild(vn); row.appendChild(q5);
+      row.appendChild(lk); row.appendChild(dl);
       $("list").appendChild(row);
       tracks.push(rec);
     })(fs[i]);
   }
   $("msg").textContent = "共 " + tracks.length + " 个";
+  syncLockAll();
 }
 
 $("pick").onclick = function(){ $("f").click(); };
@@ -385,6 +416,17 @@ $("reset").onclick = function(){
   $("msg").textContent = "已恢复 " + n + " 条（锁定的不动）";
 };
 
+/* ★ 一键全部锁定 / 全部解锁 */
+$("lockall").onclick = function(){
+  if (!tracks.length) { $("msg").textContent = "还没有音频"; return; }
+  var all = true;
+  for (var i = 0; i < tracks.length; i++) { if (!tracks[i].v.disabled) { all = false; break; } }
+  var target = !all;
+  for (var j = 0; j < tracks.length; j++) tracks[j].setLock(target);
+  syncLockAll();
+  $("msg").textContent = target ? "已全部锁定" : "已全部解锁";
+};
+
 $("loop").onchange = function(){
   var v = this.checked;
   for (var i = 0; i < tracks.length; i++) tracks[i].a.loop = v;
@@ -407,7 +449,7 @@ $("mv").onclick = function(){
 };
 
 $("exp").onclick = function(){
-  var o = { vol: {}, lock: {} };
+  var o = { vol:{}, lock:{} };
   for (var i = 0; i < tracks.length; i++) {
     o.vol[tracks[i].id] = parseFloat(tracks[i].v.value);
     if (tracks[i].v.disabled) o.lock[tracks[i].id] = true;
@@ -436,6 +478,7 @@ $("imp").onclick = function(){
 };
 
 paint($("master"));
+syncLockAll();
 </script>
 
 <script>
