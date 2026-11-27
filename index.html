@@ -11,7 +11,7 @@
 :root{
   --pink:#ff8fb1; --pink-dark:#f4688f; --pink-deep:#e14e78;
   --pink-soft:#fff7fa; --pink-line:#ffd8e4; --pink-pale:#ffedf3;
-  --ink:#3a3338; --ink-soft:#8a7a80;
+  --ink:#3a3338;
 }
 *{box-sizing:border-box}
 [hidden]{display:none !important}
@@ -23,12 +23,12 @@ body{
   background:#fff;color:var(--ink);
   line-height:1.55;-webkit-font-smoothing:antialiased;
   -webkit-tap-highlight-color:transparent;
-  background-image:radial-gradient(circle, #ffeef4 1px, transparent 1.4px);
+  background-image:radial-gradient(circle,#ffeef4 1px,transparent 1.4px);
   background-size:22px 22px;
   background-attachment:fixed;
 }
 
-/* ============ 通用 ============ */
+/* ============ 按钮 ============ */
 button{
   padding:10px 18px;font-size:14px;font-weight:600;
   border-radius:999px;border:1.5px solid var(--pink-line);
@@ -41,28 +41,23 @@ button{
 button:hover{background:var(--pink-soft);border-color:var(--pink);
   box-shadow:0 3px 12px rgba(255,143,177,.22)}
 button:active{transform:scale(.96)}
-button.main{
-  background:var(--pink);border-color:var(--pink);color:#fff;
-  box-shadow:0 5px 16px rgba(255,143,177,.45);
-}
+button.main{background:var(--pink);border-color:var(--pink);color:#fff;
+  box-shadow:0 5px 16px rgba(255,143,177,.45)}
 button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
-
 .switchbtn{background:var(--pink-soft);color:var(--pink-deep);font-weight:700}
 
-/* ============ 花饰分隔 ============ */
-.orn{display:flex;align-items:center;gap:10px;color:var(--pink);margin:0}
-.orn span{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--pink-line),transparent)}
+.orn{display:flex;align-items:center;gap:10px;color:var(--pink)}
+.orn span{flex:1;height:1px;
+  background:linear-gradient(to right,transparent,var(--pink-line),transparent)}
 
-/* ============ 工具栏卡片 ============ */
+/* ============ 工具栏 ============ */
 #bar,#vbar{
   display:flex;gap:10px;align-items:center;flex-wrap:wrap;
   padding:18px 20px;margin-bottom:16px;
-  background:#fff;
-  border:1.5px solid var(--pink-line);
-  box-shadow:0 0 0 4px #fff, 0 0 0 5.5px var(--pink-pale),
+  background:#fff;border:1.5px solid var(--pink-line);
+  border-radius:20px;position:relative;
+  box-shadow:0 0 0 4px #fff,0 0 0 5.5px var(--pink-pale),
              0 8px 26px rgba(255,143,177,.14);
-  border-radius:20px;
-  position:relative;
 }
 #bar::before,#vbar::before{
   content:"";position:absolute;top:0;left:24px;right:24px;height:3px;
@@ -73,7 +68,6 @@ button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
 #bar label,#vbar label{font-size:14px;display:flex;align-items:center;gap:7px;color:var(--ink)}
 #bar .wide input[type=range],#vbar .wide input[type=range]{flex:1;width:auto;min-width:80px}
 
-/* 拖拽提示 */
 #drophint,#vdrophint{
   flex:1 1 100%;
   border:1.5px dashed var(--pink-line);border-radius:14px;
@@ -106,7 +100,6 @@ button.main:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
   border-color:var(--pink-line);transform:none;box-shadow:none;
 }
 #lockall.on,#vlock.on{background:var(--pink);border-color:var(--pink);color:#fff}
-#lockall.on:hover,#vlock.on:hover{background:var(--pink-dark);border-color:var(--pink-dark)}
 
 button.q5{
   padding:6px 9px;font-size:12px;font-weight:700;line-height:1;
@@ -115,11 +108,10 @@ button.q5{
 }
 button.q5:hover{background:var(--pink-soft);border-color:var(--pink)}
 
-/* ============ 设置面板 ============ */
+/* ============ 面板 ============ */
 #cfgbox,#vcfgbox{
   margin-bottom:16px;padding:16px 18px;
-  border:1.5px solid var(--pink-line);border-radius:16px;
-  background:#fff;
+  border:1.5px solid var(--pink-line);border-radius:16px;background:#fff;
   box-shadow:0 0 0 3.5px var(--pink-pale),0 4px 18px rgba(255,143,177,.1);
 }
 .cfghd{display:flex;justify-content:space-between;align-items:center;
@@ -150,59 +142,50 @@ button.q5:hover{background:var(--pink-soft);border-color:var(--pink)}
   font-size:14.5px;color:var(--ink)}
 
 .vrow{
-  display:grid;
-  grid-template-columns:34px minmax(0,1fr) 32px 32px 132px 50px 46px 32px;
+  display:grid;grid-template-columns:34px minmax(0,1fr) 32px 32px 132px 50px 46px 32px;
   gap:10px;align-items:center;padding:12px 14px;
   border:1.5px solid transparent;border-bottom-color:#fdeef3;
   border-radius:12px;transition:background .12s ease,border-color .12s ease;
 }
 .vrow:hover{background:var(--pink-soft);border-color:var(--pink-line)}
 .vidx{font-size:12px;font-weight:700;color:var(--pink-dark);
-  font-family:ui-monospace,Consolas,monospace;text-align:center;
+  font-family:ui-monospace,Consolas,monospace;
   background:var(--pink-pale);border-radius:50%;width:24px;height:24px;
-  line-height:24px;justify-self:center}
+  line-height:24px;text-align:center;justify-self:center}
 
 /* ============ 空状态 ============ */
-.empty{
-  text-align:center;padding:46px 20px;color:#c9b6bd;
-  font-size:13.5px;letter-spacing:.4px;
-}
+.empty{text-align:center;padding:46px 20px;color:#c9b6bd;
+  font-size:13.5px;letter-spacing:.4px}
 .empty .orn{max-width:220px;margin:0 auto 18px}
-.empty .big{font-size:15px;color:var(--pink-dark);margin-bottom:6px;letter-spacing:.6px}
+.empty .big{font-size:15px;color:var(--pink-dark);margin-bottom:6px;
+  letter-spacing:.6px}
 .empty .en{font-style:italic;font-size:12px;color:#d3c2c9;
   font-family:Georgia,"Times New Roman",serif;letter-spacing:.5px}
 
 /* ============ 视频播放区 ============ */
-#vstage{
-  display:none;margin-bottom:16px;
-  background:#141414;border-radius:18px;overflow:hidden;
-  box-shadow:0 0 0 4px var(--pink-pale),0 10px 30px rgba(0,0,0,.18);
-}
+#vstage{display:none;margin-bottom:16px;background:#141414;
+  border-radius:18px;overflow:hidden;
+  box-shadow:0 0 0 4px var(--pink-pale),0 10px 30px rgba(0,0,0,.18)}
 #vstage.on{display:block}
 #vplayer{width:100%;max-height:54vh;display:block;background:#000}
-#vnow{
-  font-size:13px;font-weight:600;color:var(--pink-deep);
+#vnow{font-size:13px;font-weight:600;color:var(--pink-deep);
   background:var(--pink-soft);padding:11px 16px;letter-spacing:.3px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ============ 表单控件 ============ */
 input[type=checkbox]{accent-color:var(--pink);width:18px;height:18px;
   cursor:pointer;flex:none}
 input[type=range]{
-  -webkit-appearance:none;appearance:none;
-  width:132px;height:8px;border-radius:999px;
-  background:#f3f0f1;outline:none;cursor:pointer;flex:none;
+  -webkit-appearance:none;appearance:none;width:132px;height:8px;
+  border-radius:999px;background:#f3f0f1;outline:none;cursor:pointer;flex:none;
 }
 input[type=range]::-webkit-slider-thumb{
   -webkit-appearance:none;width:19px;height:19px;border-radius:50%;
   background:#fff;border:3px solid var(--pink);cursor:pointer;
-  box-shadow:0 2px 6px rgba(0,0,0,.12);
-}
+  box-shadow:0 2px 6px rgba(0,0,0,.12)}
 input[type=range]::-moz-range-thumb{
-  width:14px;height:14px;border-radius:50%;
-  background:#fff;border:3px solid var(--pink);cursor:pointer;
-}
+  width:14px;height:14px;border-radius:50%;background:#fff;
+  border:3px solid var(--pink);cursor:pointer}
 input[type=range]:disabled{cursor:not-allowed}
 
 .vn{width:48px;text-align:right;font-size:12.5px;font-weight:700;
@@ -214,12 +197,10 @@ input[type=range]:disabled{cursor:not-allowed}
   letter-spacing:.3px}
 ::placeholder{color:#dcc9d1}
 
-/* ============ 页脚落款 ============ */
-.foot{
-  margin-top:34px;text-align:center;font-size:11.5px;font-style:italic;
+/* ============ 页脚 ============ */
+.foot{margin-top:34px;text-align:center;font-size:11.5px;font-style:italic;
   color:#d3c2c9;letter-spacing:.6px;
-  font-family:Georgia,"Times New Roman",serif;
-}
+  font-family:Georgia,"Times New Roman",serif}
 .foot .orn{max-width:180px;margin:0 auto 14px;opacity:.7}
 
 /* ============ 回到顶部 ============ */
@@ -235,20 +216,16 @@ input[type=range]:disabled{cursor:not-allowed}
 #top.show{display:flex}
 #top:hover{background:var(--pink-dark);transform:translateY(-2px)}
 
-/* ============ 进门提问 ============ */
-#gate{
-  position:fixed;inset:0;z-index:9999;display:flex;
+/* ============ 进门 ============ */
+#gate{position:fixed;inset:0;z-index:9999;display:flex;
   align-items:center;justify-content:center;padding:24px;
-  background:linear-gradient(160deg,#ffd9e6 0%,#fff7fa 55%,#ffe9f1 100%);
-}
+  background:linear-gradient(160deg,#ffd9e6 0%,#fff7fa 55%,#ffe9f1 100%)}
 #gate.hide{display:none}
-.gate-card{
-  width:100%;max-width:450px;background:#fff;
+.gate-card{width:100%;max-width:450px;background:#fff;
   border:1.5px solid var(--pink-line);border-radius:28px;
   padding:30px 28px 22px;text-align:center;
   box-shadow:0 0 0 5px #fff,0 0 0 6.5px var(--pink-pale),
-             0 20px 54px rgba(255,143,177,.32);
-}
+             0 20px 54px rgba(255,143,177,.32)}
 .gate-crown{color:var(--pink);margin-bottom:8px;
   animation:crownFloat 2.8s ease-in-out infinite}
 @keyframes crownFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
@@ -257,8 +234,8 @@ input[type=range]:disabled{cursor:not-allowed}
 .gate-en{font-size:13px;font-style:italic;letter-spacing:.4px;
   color:var(--pink-dark);margin-bottom:2px;
   font-family:Georgia,"Times New Roman",serif}
-.gate-by{font-size:11.5px;font-style:italic;color:#c9b3bb;
-  text-align:right;padding-right:6px;margin-bottom:16px;
+.gate-by{font-size:11.5px;font-style:italic;color:#c9b3bb;text-align:right;
+  padding-right:6px;margin-bottom:16px;
   font-family:Georgia,"Times New Roman",serif}
 .gate-sub{font-size:12.5px;color:#bda8b0;margin-bottom:18px;letter-spacing:.3px}
 #gateIn{width:100%;padding:14px 16px;font-size:16px;
@@ -282,13 +259,11 @@ input[type=range]:disabled{cursor:not-allowed}
 }
 .shake{animation:shake .42s ease}
 
-/* ============ 谢谢过渡 ============ */
-#thanks{
-  position:fixed;inset:0;z-index:99999;display:flex;
+/* ============ 谢谢 ============ */
+#thanks{position:fixed;inset:0;z-index:99999;display:flex;
   flex-direction:column;align-items:center;justify-content:center;
   background:linear-gradient(160deg,#ffd9e6 0%,#fff7fa 55%,#ffe9f1 100%);
-  opacity:0;pointer-events:none;transition:opacity .45s ease;
-}
+  opacity:0;pointer-events:none;transition:opacity .45s ease}
 #thanks.show{opacity:1;pointer-events:auto}
 .thanks-heart{color:var(--pink);margin-bottom:14px;
   animation:beat 1.05s ease-in-out infinite;
@@ -300,80 +275,56 @@ input[type=range]:disabled{cursor:not-allowed}
   letter-spacing:1.2px;color:var(--pink-dark);
   font-family:Georgia,"Times New Roman",serif}
 
-/* ============ 模式选择 ============ */
-#picker{
-  position:fixed;inset:0;z-index:9500;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:28px;
-  background:linear-gradient(160deg,#ffd9e6 0%,#fff7fa 55%,#ffe9f1 100%);
-  overflow:auto;
-}
+/* ============ 选择页 ============ */
+#picker{position:fixed;inset:0;z-index:9500;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:28px;overflow:auto;
+  background:linear-gradient(160deg,#ffd9e6 0%,#fff7fa 55%,#ffe9f1 100%)}
 #picker.hide{display:none}
 .pick-head{text-align:center;margin-bottom:26px}
-.pick-head h1{
-  font-size:clamp(21px,3.4vw,27px);font-weight:800;color:var(--pink-deep);
-  letter-spacing:2px;margin:0 0 4px;
-}
-.pick-head .en{
-  font-size:12.5px;font-style:italic;color:#c9a9b6;letter-spacing:.8px;
-  font-family:Georgia,"Times New Roman",serif;
-}
+.pick-head h1{font-size:clamp(21px,3.4vw,27px);font-weight:800;
+  color:var(--pink-deep);letter-spacing:2px;margin:0 0 4px}
+.pick-head .en{font-size:12.5px;font-style:italic;color:#c9a9b6;
+  letter-spacing:.8px;font-family:Georgia,"Times New Roman",serif}
 .pick-head .orn{max-width:260px;margin:14px auto 0}
 
 .pick-row{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
-.pick-card{
-  width:270px;padding:30px 24px 24px;border-radius:26px;background:#fff;
-  border:1.5px solid var(--pink-line);
+.pick-card{width:270px;padding:30px 24px 24px;border-radius:26px;background:#fff;
+  border:1.5px solid var(--pink-line);text-align:center;cursor:pointer;
+  position:relative;
   box-shadow:0 0 0 4px #fff,0 0 0 5.5px var(--pink-pale),
              0 16px 44px rgba(255,143,177,.26);
-  text-align:center;cursor:pointer;
-  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
-  position:relative;
-}
-.pick-card:hover{
-  transform:translateY(-6px);border-color:var(--pink);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.pick-card:hover{transform:translateY(-6px);border-color:var(--pink);
   box-shadow:0 0 0 4px #fff,0 0 0 5.5px var(--pink-line),
-             0 24px 60px rgba(255,143,177,.4);
-}
-.pick-ico{
-  color:var(--pink);margin-bottom:12px;
-  display:flex;justify-content:center;
-}
-.pick-t{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:2px}
+             0 24px 60px rgba(255,143,177,.4)}
+.pick-ico{color:var(--pink);margin-bottom:12px;display:flex;justify-content:center}
+.pick-t{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:3px}
 .pick-s{font-size:12.5px;color:#b8a2ab;margin-top:9px;line-height:1.75;
   letter-spacing:.3px}
 .pick-s.warn{color:var(--pink-deep);font-weight:600;margin-top:10px;
   font-size:12px;letter-spacing:.6px}
-.pick-foot{
-  margin-top:28px;font-size:11.5px;font-style:italic;color:#c9a9b6;
-  letter-spacing:.6px;
-  font-family:Georgia,"Times New Roman",serif;
-}
+.pick-foot{margin-top:28px;font-size:11.5px;font-style:italic;color:#c9a9b6;
+  letter-spacing:.6px;font-family:Georgia,"Times New Roman",serif}
 
-/* ============ 手机适配 ============ */
+/* ============ 手机 ============ */
 @media (max-width:620px){
-  #bar,#vbar{
-    display:grid;grid-template-columns:1fr 1fr 1fr;
-    gap:8px;padding:14px 12px;border-radius:18px;
-  }
+  #bar,#vbar{display:grid;grid-template-columns:1fr 1fr 1fr;
+    gap:8px;padding:14px 12px;border-radius:18px}
   #bar button,#vbar button{width:100%;padding:10px 3px;font-size:12.5px;gap:4px}
   #pick,#vpick,#switchToVideo,#switchToAudio{grid-column:1 / -1}
   #bar label,#vbar label{grid-column:1 / -1;font-size:13.5px;gap:8px}
   #drophint,#vdrophint{grid-column:1 / -1;padding:9px 10px;font-size:11.8px}
   #msg,#vmsg{grid-column:1 / -1;text-align:center}
 
-  .row{
-    grid-template-columns:auto minmax(0,1fr) auto auto auto;
+  .row{grid-template-columns:auto minmax(0,1fr) auto auto auto;
     grid-template-areas:"cb nm dl dl dl" "pb vo vn q5 lk";
-    gap:9px 8px;padding:12px 10px;
-  }
+    gap:9px 8px;padding:12px 10px}
   .cb{grid-area:cb}.nm{grid-area:nm}.pb{grid-area:pb}
   .vo{grid-area:vo}.vn{grid-area:vn}.q5{grid-area:q5}
   .lk{grid-area:lk;justify-self:end}.dl{grid-area:dl;justify-self:end}
-  .name{white-space:normal;word-break:break-all;line-height:1.38;
-    font-size:14px;display:-webkit-box;-webkit-line-clamp:2;
-    -webkit-box-orient:vertical;overflow:hidden}
+  .name{white-space:normal;word-break:break-all;line-height:1.38;font-size:14px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    overflow:hidden}
   #list .row input[type=range],#vlist .vrow input[type=range]{width:100%;min-width:0}
 
   .vrow{display:flex;flex-wrap:wrap;gap:8px 10px;padding:12px 10px}
@@ -391,7 +342,7 @@ input[type=range]:disabled{cursor:not-allowed}
 </head>
 <body>
 
-<!-- ================= 进门提问 ================= -->
+<!-- ================= 进门 ================= -->
 <div id="gate">
   <div class="gate-card">
     <div class="gate-crown">
@@ -413,7 +364,7 @@ input[type=range]:disabled{cursor:not-allowed}
   </div>
 </div>
 
-<!-- ================= 谢谢过渡 ================= -->
+<!-- ================= 谢谢 ================= -->
 <div id="thanks" hidden>
   <div class="thanks-heart">
     <svg viewBox="0 0 24 24" width="44" height="44" aria-hidden="true">
@@ -426,19 +377,16 @@ input[type=range]:disabled{cursor:not-allowed}
   <div class="thanks-en">Thank You</div>
 </div>
 
-<!-- ================= 模式选择 ================= -->
+<!-- ================= 选择页 ================= -->
 <div id="picker" hidden>
   <div class="pick-head">
-    <h1>今晚想看哪一场？</h1>
+    <h1>今晚，想看哪一场？</h1>
     <div class="en">Which show shall we open?</div>
-    <div class="orn">
-      <span></span>
+    <div class="orn"><span></span>
       <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true">
         <path d="M12 3.2l2.2 5.6 5.8 1.4-5.8 1.4L12 17.2 9.8 11.6 4 10.2l5.8-1.4z"
-              fill="currentColor"/>
-      </svg>
-      <span></span>
-    </div>
+              fill="currentColor"/></svg>
+      <span></span></div>
   </div>
 
   <div class="pick-row">
@@ -452,8 +400,8 @@ input[type=range]:disabled{cursor:not-allowed}
           <circle cx="15.8" cy="15.9" r="2.7" fill="currentColor"/>
         </svg>
       </div>
-      <div class="pick-t">音频</div>
-      <div class="pick-s">几十位同台，各唱各的调<br>可同时播放 · 各自音量 · 处处循环</div>
+      <div class="pick-t">音乐会</div>
+      <div class="pick-s">数十位同台，各按其声<br>同时演奏 · 各自成调 · 循环不息</div>
     </div>
 
     <div class="pick-card" id="toVideo">
@@ -467,99 +415,94 @@ input[type=range]:disabled{cursor:not-allowed}
                 stroke-width="1.5" fill="none"/>
         </svg>
       </div>
-      <div class="pick-t">视频</div>
-      <div class="pick-s">一位一位登场，谢幕自动请下一位<br>顺序可排 · 整份名单循环</div>
-      <div class="pick-s warn">建议在电脑上欣赏</div>
+      <div class="pick-t">放映厅</div>
+      <div class="pick-s">逐部登场，谢幕即请下一位<br>次序可排 · 全场循环</div>
+      <div class="pick-s warn">请在电脑上观赏</div>
     </div>
   </div>
 
-  <div class="pick-foot">— 由一位非常得意的女士为你布置</div>
+  <div class="pick-foot">谨由某位素来得意的女士亲手布置</div>
 </div>
 
-<!-- ================= 音频视图 ================= -->
+<!-- ================= 音乐会 ================= -->
 <div id="viewAudio" hidden>
   <div id="bar">
     <button id="pick" class="main">
       <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
         <path d="M12 5.5v13M5.5 12h13" stroke="currentColor" stroke-width="2.2"
-              fill="none" stroke-linecap="round"/>
-      </svg>
-      选择音频
+              fill="none" stroke-linecap="round"/></svg>
+      呈上节目单
     </button>
-    <button id="play">▶ 播放选中</button>
-    <button id="stop">■ 全部停止</button>
-    <button id="reset">↺ 都回到 25%</button>
-    <button id="lockall">全部锁定</button>
-    <button id="exp">导出</button>
-    <button id="imp">导入</button>
-    <label class="wide"><input type="checkbox" id="loop" checked> 循环播放</label>
+    <button id="play">开幕</button>
+    <button id="stop">落幕</button>
+    <button id="reset">众音归位</button>
+    <button id="lockall">全部封印</button>
+    <button id="exp">誊录</button>
+    <button id="imp">吟诵</button>
+    <label class="wide"><input type="checkbox" id="loop" checked> 循环演奏</label>
     <label class="wide">
       总音量 <input id="master" type="range" min="0" max="1" step="0.01" value="1">
       <span class="vn" id="mv">100%</span>
     </label>
     <span id="msg"></span>
-    <button id="switchToVideo" class="switchbtn">去视频那边</button>
-    <div id="drophint">也可以直接把音频拖进来 —— 这整片都归你差遣</div>
+    <button id="switchToVideo" class="switchbtn">移步放映厅</button>
+    <div id="drophint">直接拖进来就好哦 —— 音乐会的座位，管够。</div>
   </div>
 
   <div id="cfgbox" hidden>
     <div class="cfghd">
-      <span>音频名单 · 抄送与领回</span>
-      <button id="cfgclose">收起</button>
+      <span>节目单 · 誊录与吟诵</span>
+      <button id="cfgclose">合上</button>
     </div>
-    <textarea id="cfg" placeholder="导出的内容会出现在这里；领回时把那段贴进来，再点「应用导入」"></textarea>
+    <textarea id="cfg" placeholder="誊录的咒文会落在此处；若要复用，把它贴回来，再点「照此吟诵」。"></textarea>
     <div class="cfgft">
-      <button id="cfgapply" class="main">应用导入</button>
-      <button id="cfgcopy">复制框里的内容</button>
+      <button id="cfgapply" class="main">照此吟诵</button>
+      <button id="cfgcopy">一并抄走</button>
     </div>
   </div>
 
   <div id="list"></div>
   <div id="emptyA" class="empty">
-    <div class="orn">
-      <span></span>
+    <div class="orn"><span></span>
       <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
         <path d="M12 3.2l2.2 5.6 5.8 1.4-5.8 1.4L12 17.2 9.8 11.6 4 10.2l5.8-1.4z"
-              fill="currentColor"/>
-      </svg>
-      <span></span>
-    </div>
-    <div class="big">还没有人登场。要不要先请几位进来？</div>
-    <div class="en">No one has arrived yet.</div>
+              fill="currentColor"/></svg>
+      <span></span></div>
+    <div class="big">幕布未启，尚无人登台。何不先请几位入席？</div>
+    <div class="en">The curtain has not risen.</div>
   </div>
 
   <div class="foot">
     <div class="orn"><span></span>
       <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true">
         <path d="M12 3.2l2.2 5.6 5.8 1.4-5.8 1.4L12 17.2 9.8 11.6 4 10.2l5.8-1.4z"
-              fill="currentColor"/>
-      </svg><span></span></div>
-    — a certain very smug lady
+              fill="currentColor"/></svg>
+      <span></span></div>
+    某位素来得意的女士
   </div>
 </div>
 
-<!-- ================= 视频视图 ================= -->
+<!-- ================= 放映厅 ================= -->
 <div id="viewVideo" hidden>
   <div id="vbar">
     <button id="vpick" class="main">
       <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
         <path d="M12 5.5v13M5.5 12h13" stroke="currentColor" stroke-width="2.2"
-              fill="none" stroke-linecap="round"/>
-      </svg>
-      选择视频
+              fill="none" stroke-linecap="round"/></svg>
+      呈上片单
     </button>
-    <button id="vplay">▶ 开演</button>
-    <button id="vstop">■ 停止</button>
-    <button id="vlock">全部锁定</button>
-    <button id="vexp">导出</button>
-    <button id="vimp">导入</button>
+    <button id="vplay">开演</button>
+    <button id="vstop">散场</button>
+    <button id="vlock">全部封印</button>
+    <button id="vexp">誊录</button>
+    <button id="vimp">吟诵</button>
     <label class="wide">
       总音量 <input id="vmaster" type="range" min="0" max="1" step="0.01" value="1">
       <span class="vn" id="vmv">100%</span>
     </label>
     <span id="vmsg"></span>
-    <button id="switchToAudio" class="switchbtn">回音频那边</button>
-    <div id="vdrophint">把视频拖进来吧；电脑上会更从容一些</div>
+    <button id="switchToAudio" class="switchbtn">移步音乐会</button>
+    <div id="vdrophint">直接拖进来就好哦 —— 放映厅的位子，随您挑。</div>
   </div>
 
   <div id="vstage">
@@ -569,37 +512,34 @@ input[type=range]:disabled{cursor:not-allowed}
 
   <div id="vcfgbox" hidden>
     <div class="cfghd">
-      <span>视频名单 · 顺序与音量</span>
-      <button id="vcfgclose">收起</button>
+      <span>片单 · 誊录与吟诵</span>
+      <button id="vcfgclose">合上</button>
     </div>
-    <textarea id="vcfg" placeholder="导出的内容会出现在这里；领回时把那段贴进来，再点「应用导入」"></textarea>
+    <textarea id="vcfg" placeholder="誊录的咒文会落在此处；若要复用，把它贴回来，再点「照此吟诵」。"></textarea>
     <div class="cfgft">
-      <button id="vcfgapply" class="main">应用导入</button>
-      <button id="vcfgcopy">复制框里的内容</button>
+      <button id="vcfgapply" class="main">照此吟诵</button>
+      <button id="vcfgcopy">一并抄走</button>
     </div>
   </div>
 
   <div id="vlist"></div>
   <div id="emptyV" class="empty">
-    <div class="orn">
-      <span></span>
+    <div class="orn"><span></span>
       <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
         <path d="M12 3.2l2.2 5.6 5.8 1.4-5.8 1.4L12 17.2 9.8 11.6 4 10.2l5.8-1.4z"
-              fill="currentColor"/>
-      </svg>
-      <span></span>
-    </div>
-    <div class="big">剧院还空着。挑一部片子开场吧。</div>
-    <div class="en">The stage is waiting.</div>
+              fill="currentColor"/></svg>
+      <span></span></div>
+    <div class="big">片单还空着 —— 尚未遇着合心意的片子。慢慢挑，不急。</div>
+    <div class="en">No picture has been chosen yet.</div>
   </div>
 
   <div class="foot">
     <div class="orn"><span></span>
       <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true">
         <path d="M12 3.2l2.2 5.6 5.8 1.4-5.8 1.4L12 17.2 9.8 11.6 4 10.2l5.8-1.4z"
-              fill="currentColor"/>
-      </svg><span></span></div>
-    — a certain very smug lady
+              fill="currentColor"/></svg>
+      <span></span></div>
+    某位素来得意的女士
   </div>
 </div>
 
@@ -614,8 +554,8 @@ input[type=range]:disabled{cursor:not-allowed}
 <input type="file" id="vf" multiple accept="video/*" hidden>
 
 <script>
-var KEY_A = "multiAudio.v7";
-var KEY_V = "videoPlaylist.v7";
+var KEY_A = "multiAudio.v8";
+var KEY_V = "videoPlaylist.v8";
 var DEF_A = 0.25;
 var DEF_V = 0.05;
 var QUICK = 0.05;
@@ -629,13 +569,11 @@ var $ = function(id){ return document.getElementById(id); };
 var I_PLAY  = '<svg viewBox="0 0 24 24" width="15" height="15"><polygon points="8,5 20,12 8,19" fill="currentColor"/></svg>';
 var I_PAUSE = '<svg viewBox="0 0 24 24" width="15" height="15"><rect x="7" y="5" width="4.2" height="14" rx="1.6" fill="currentColor"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.6" fill="currentColor"/></svg>';
 
-/* 心形挂锁 · 已锁 */
 var I_LOCK = '<svg viewBox="0 0 24 24" width="14" height="14">'
   + '<path d="M8.7 11V8.2a3.3 3.3 0 0 1 6.6 0V11" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/>'
   + '<path d="M12 21s-5.7-3.4-7.1-6.9C3.6 10.9 5.2 8.3 7.8 8c1.6-.2 3 .7 4.2 2.1 1.2-1.4 2.6-2.3 4.2-2.1 2.6.3 4.2 2.9 2.9 6.1C17.7 17.6 12 21 12 21z" fill="currentColor"/>'
   + '</svg>';
 
-/* 心形挂锁 · 已开 */
 var I_OPEN = '<svg viewBox="0 0 24 24" width="14" height="14">'
   + '<path d="M8.7 11V8.2a3.3 3.3 0 0 1 6.1-1.9" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/>'
   + '<path d="M12 21s-5.7-3.4-7.1-6.9C3.6 10.9 5.2 8.3 7.8 8c1.6-.2 3 .7 4.2 2.1 1.2-1.4 2.6-2.3 4.2-2.1 2.6.3 4.2 2.9 2.9 6.1C17.7 17.6 12 21 12 21z" fill="currentColor" opacity=".28"/>'
@@ -653,7 +591,6 @@ function paint(el){
   var p = Math.round(el.value*100);
   el.style.background = "linear-gradient(to right,#ff8fb1 "+p+"%,#f3f0f1 "+p+"%)";
 }
-
 function updEmpty(){
   $("emptyA").hidden = tracks.length > 0;
   $("emptyV").hidden = videos.length > 0;
@@ -692,7 +629,7 @@ $("gateIn").addEventListener("keydown", function(e){
 });
 if (!ASK_ON_START){ $("gate").classList.add("hide"); $("picker").hidden = false; }
 
-/* ---------- 模式切换 ---------- */
+/* ---------- 视图切换 ---------- */
 function showView(which){
   $("picker").hidden = true;
   $("viewAudio").hidden = (which !== "audio");
@@ -708,7 +645,7 @@ $("switchToAudio").onclick = function(){ showView("audio"); };
 window.addEventListener("beforeunload", function(e){
   if (tracks.length > 0 || videos.length > 0){
     e.preventDefault();
-    e.returnValue = "名单里还有内容，确定要离开吗？";
+    e.returnValue = "名单里还有内容，确定要离开么？";
     return e.returnValue;
   }
 });
@@ -722,24 +659,32 @@ $("top").onclick = function(){
 };
 
 /* ============================================================
-   音频
+   音乐会
    ============================================================ */
 function syncLockAll(){
   var b = $("lockall");
-  var txt = "全部锁定";
-  if (tracks.length){
-    var all = true;
-    for (var i=0;i<tracks.length;i++){ if (!tracks[i].v.disabled){ all=false; break; } }
-    b.classList.toggle("on", all);
-    txt = all ? "全部松开" : "全部锁定";
-    b.innerHTML = (all ? I_LOCK : I_OPEN) + "<span>" + txt + "</span>";
-  } else {
+  if (!tracks.length){
     b.classList.remove("on");
-    b.innerHTML = I_OPEN + "<span>" + txt + "</span>";
+    b.innerHTML = I_OPEN + "<span>全部封印</span>";
+    return;
   }
+  var all = true;
+  for (var i=0;i<tracks.length;i++){ if (!tracks[i].v.disabled){ all=false; break; } }
+  b.classList.toggle("on", all);
+  b.innerHTML = all
+    ? (I_LOCK + "<span>尽数解封</span>")
+    : (I_OPEN + "<span>全部封印</span>");
 }
 
 function addFiles(fs){
+  var arr = [];
+  for (var i=0;i<fs.length;i++) arr.push(fs[i]);
+  if (!arr.length) return;
+  $("msg").textContent = "乐手正在入场……";
+  setTimeout(function(){ doAddFiles(arr); }, 45);
+}
+
+function doAddFiles(fs){
   var cfg = loadK(KEY_A);
   for (var i=0;i<fs.length;i++){
     (function(file){
@@ -756,7 +701,7 @@ function addFiles(fs){
       nm.className="name nm"; nm.textContent=file.name; nm.title=file.name;
 
       var bt = document.createElement("button");
-      bt.className="pbtn pb"; bt.title="单独听一下"; bt.innerHTML=I_PLAY;
+      bt.className="pbtn pb"; bt.title="单独听这一位"; bt.innerHTML=I_PLAY;
 
       var vo = document.createElement("input");
       vo.type="range"; vo.min=0; vo.max=1; vo.step=0.01; vo.className="vo";
@@ -768,13 +713,13 @@ function addFiles(fs){
 
       var q5 = document.createElement("button");
       q5.className="q5"; q5.textContent = Math.round(QUICK*100)+"%";
-      q5.title="一键压到 "+Math.round(QUICK*100)+"%";
+      q5.title="嘘……";
 
       var lk = document.createElement("button");
-      lk.className="lk"; lk.title="锁住这一条的音量";
+      lk.className="lk"; lk.title="封印这一位的声音";
 
       var dl = document.createElement("button");
-      dl.className="dl"; dl.title="请出去"; dl.innerHTML=I_TRASH;
+      dl.className="dl"; dl.title="退场"; dl.innerHTML=I_TRASH;
 
       var au = new Audio(url);
       au.loop = $("loop").checked;
@@ -819,21 +764,21 @@ function addFiles(fs){
       setLock(!!(cfg.lock && cfg.lock[id]));
 
       dl.onclick = function(){
-        if (!confirm("请这位出去？\n" + file.name)) return;
+        if (!confirm("要让这一位退场么？\n" + file.name)) return;
         au.pause(); au.removeAttribute("src");
         try { URL.revokeObjectURL(url); } catch(e){}
         if (row.parentNode) row.parentNode.removeChild(row);
         for (var z=0;z<tracks.length;z++){
           if (tracks[z]===rec){ tracks.splice(z,1); break; }
         }
-        $("msg").textContent = "还剩 " + tracks.length + " 位";
+        $("msg").textContent = "尚有 " + tracks.length + " 位";
         syncLockAll(); updEmpty();
       };
 
       bt.onclick = function(){ if (au.paused){ au.play(); } else { au.pause(); } };
       au.onplay  = function(){ bt.innerHTML = I_PAUSE; };
       au.onpause = function(){ bt.innerHTML = I_PLAY; };
-      au.onerror = function(){ nm.textContent = file.name + "（这位唱不了）"; };
+      au.onerror = function(){ nm.textContent = file.name + "（此位无法发声）"; };
 
       row.appendChild(cb); row.appendChild(nm); row.appendChild(bt);
       row.appendChild(vo); row.appendChild(vn); row.appendChild(q5);
@@ -842,21 +787,30 @@ function addFiles(fs){
       tracks.push(rec);
     })(fs[i]);
   }
-  $("msg").textContent = "共 " + tracks.length + " 位在列";
+  $("msg").textContent = "节目单已列 " + tracks.length + " 位";
   syncLockAll(); updEmpty();
 }
 
 $("pick").onclick = function(){ $("f").click(); };
-$("f").onchange = function(e){ addFiles(e.target.files); e.target.value=""; };
+$("f").onchange = function(e){ var a=e.target.files; addFiles(a); e.target.value=""; };
 
+/* ★ 开幕：错峰起声，避免同时启动的卡顿 */
 $("play").onclick = function(){
-  for (var i=0;i<tracks.length;i++){
-    if (tracks[i].c.checked){ try{ tracks[i].a.play(); }catch(err){} }
+  var sel = [];
+  for (var i=0;i<tracks.length;i++){ if (tracks[i].c.checked) sel.push(tracks[i]); }
+  if (!sel.length){ $("msg").textContent = "尚未有人入选"; return; }
+  var gap = Math.min(45, 1800 / sel.length);
+  for (var j=0;j<sel.length;j++){
+    (function(t, k){
+      setTimeout(function(){ try { t.a.play(); } catch(e){} }, k * gap);
+    })(sel[j], j);
   }
+  $("msg").textContent = "开幕 —— " + sel.length + " 位正在入场";
 };
+
 $("stop").onclick = function(){
   for (var i=0;i<tracks.length;i++){ tracks[i].a.pause(); tracks[i].a.currentTime=0; }
-  $("msg").textContent = "都安静下来了";
+  $("msg").textContent = "全场静默";
 };
 
 $("reset").onclick = function(){
@@ -871,18 +825,18 @@ $("reset").onclick = function(){
   }
   saveK(KEY_A, c);
   $("msg").textContent = n
-    ? "请 " + n + " 位回到 " + Math.round(DEF_A*100) + "%，锁着的那几位没动"
-    : "都锁着呢，一位也没动";
+    ? "已请 " + n + " 位归位；封印的那几位未动"
+    : "悉数封印，一位未动";
 };
 
 $("lockall").onclick = function(){
-  if (!tracks.length){ $("msg").textContent = "名单还空着"; return; }
+  if (!tracks.length){ $("msg").textContent = "节目单尚空"; return; }
   var all = true;
   for (var i=0;i<tracks.length;i++){ if (!tracks[i].v.disabled){ all=false; break; } }
   var target = !all;
   for (var j=0;j<tracks.length;j++) tracks[j].setLock(target);
   syncLockAll();
-  $("msg").textContent = target ? "全部锁好，谁也不许乱动" : "都松开了";
+  $("msg").textContent = target ? "已悉数封印，无人可动" : "已尽数解封";
 };
 
 $("loop").onchange = function(){
@@ -918,20 +872,20 @@ $("exp").onclick = function(){
   saveK(KEY_A, o);
   var t = JSON.stringify(o);
   $("cfg").value = t; openCfg();
-  try { navigator.clipboard.writeText(t); $("msg").textContent="已抄好，也替你复制了"; }
-  catch(e){ $("msg").textContent="已抄好，请手动复制一下"; }
+  try { navigator.clipboard.writeText(t); $("msg").textContent="已誊录，并为您另抄一份"; }
+  catch(e){ $("msg").textContent="已誊录，还请您亲自抄一份"; }
 };
 $("imp").onclick = function(){
   openCfg();
-  $("msg").textContent = "把那段贴进来，再点「应用导入」";
+  $("msg").textContent = "请将咒文贴入此处，再点「照此吟诵」";
   try { $("cfg").focus(); } catch(e){}
 };
 $("cfgclose").onclick = function(){ $("cfgbox").hidden = true; };
 $("cfgcopy").onclick = function(){
   var t = $("cfg").value;
-  if (!t){ $("msg").textContent="框里空空如也"; return; }
-  try { navigator.clipboard.writeText(t); $("msg").textContent="复制好了"; }
-  catch(e){ $("msg").textContent="复制没成功，手动选中吧"; }
+  if (!t){ $("msg").textContent="此处空无一物"; return; }
+  try { navigator.clipboard.writeText(t); $("msg").textContent="已抄入剪贴板"; }
+  catch(e){ $("msg").textContent="未能抄录，劳您手动选取"; }
 };
 $("cfgapply").onclick = function(){
   try {
@@ -946,19 +900,20 @@ $("cfgapply").onclick = function(){
         t.a.volume = Math.min(1, t.v.value * $("master").value);
       }
     }
-    $("msg").textContent = "接上了，一切照旧";
+    $("msg").textContent = "已照此吟诵，一切如故";
     $("cfgbox").hidden = true;
-  } catch(e){ $("msg").textContent="这段对不上，再检查一下？"; }
+  } catch(e){ $("msg").textContent="此咒文与现况不符，请再验看"; }
 };
 
 /* ============================================================
-   视频
+   放映厅
    ============================================================ */
 function vSyncLock(){
   var b = $("vlock");
   b.classList.toggle("on", vLocked);
-  b.innerHTML = (vLocked ? I_LOCK : I_OPEN)
-    + "<span>" + (vLocked ? "已经锁好" : "全部锁定") + "</span>";
+  b.innerHTML = vLocked
+    ? (I_LOCK + "<span>尽数解封</span>")
+    : (I_OPEN + "<span>全部封印</span>");
   for (var i=0;i<videos.length;i++){
     var r = videos[i];
     r.v.disabled = vLocked;
@@ -992,6 +947,14 @@ function saveVOrder(){
 }
 
 function addVideos(fs){
+  var arr = [];
+  for (var i=0;i<fs.length;i++) arr.push(fs[i]);
+  if (!arr.length) return;
+  $("vmsg").textContent = "银幕正在亮起……";
+  setTimeout(function(){ doAddVideos(arr); }, 45);
+}
+
+function doAddVideos(fs){
   var cfg = loadK(KEY_V);
   for (var i=0;i<fs.length;i++){
     (function(file){
@@ -1006,10 +969,10 @@ function addVideos(fs){
       nm.textContent = file.name; nm.title = file.name;
 
       var u = document.createElement("button");
-      u.className="vup"; u.title="往前挪"; u.innerHTML=I_UP;
+      u.className="vup"; u.title="前移一位"; u.innerHTML=I_UP;
 
       var d = document.createElement("button");
-      d.className="vdn"; d.title="往后挪"; d.innerHTML=I_DOWN;
+      d.className="vdn"; d.title="后移一位"; d.innerHTML=I_DOWN;
 
       var v = document.createElement("input");
       v.type="range"; v.min=0; v.max=1; v.step=0.01; v.className="vvo";
@@ -1021,9 +984,10 @@ function addVideos(fs){
 
       var q = document.createElement("button");
       q.className="q5"; q.textContent = Math.round(QUICK*100)+"%";
+      q.title = "嘘……";
 
       var x = document.createElement("button");
-      x.className="dl vdl"; x.title="请出去"; x.innerHTML=I_TRASH;
+      x.className="dl vdl"; x.title="退场"; x.innerHTML=I_TRASH;
 
       var rec = { id:id, name:file.name, url:url, row:row, idx:idx,
                   v:v, n:n, q:q, u:u, d:d, x:x };
@@ -1058,7 +1022,7 @@ function addVideos(fs){
         if (i2 < videos.length-1){ videos.splice(i2,1); videos.splice(i2+1,0,rec); renderVList(); saveVOrder(); }
       };
       x.onclick = function(){
-        if (!confirm("请这部片子离场？\n" + file.name)) return;
+        if (!confirm("要让这一部退场么？\n" + file.name)) return;
         var i2 = videos.indexOf(rec);
         var cur = (curIdx === i2);
         videos.splice(i2,1);
@@ -1092,7 +1056,7 @@ function addVideos(fs){
 }
 
 $("vpick").onclick = function(){ $("vf").click(); };
-$("vf").onchange = function(e){ addVideos(e.target.files); e.target.value=""; };
+$("vf").onchange = function(e){ var a=e.target.files; addVideos(a); e.target.value=""; };
 
 function vPlayAt(i){
   if (!videos.length) return;
@@ -1108,13 +1072,13 @@ function vPlayAt(i){
 }
 
 $("vplay").onclick = function(){
-  if (!videos.length){ $("vmsg").textContent = "剧院还空着"; return; }
+  if (!videos.length){ $("vmsg").textContent = "片单尚空"; return; }
   vPlayAt(Math.min(curIdx, videos.length-1));
 };
 $("vstop").onclick = function(){
   $("vplayer").pause();
   $("vplayer").currentTime = 0;
-  $("vnow").textContent = "谢幕了";
+  $("vnow").textContent = "已经散场";
 };
 
 $("vplayer").addEventListener("ended", function(){ vPlayAt(curIdx + 1); });
@@ -1125,23 +1089,23 @@ $("vplayer").addEventListener("error", function(){
   if (rec){
     var el = rec.row.querySelector(".vnm");
     el.style.color = "#e14e78";
-    el.title = "这部片子的编码浏览器不认，转成 MP4（H.264）就好";
+    el.title = "此片编码不为本机所识，转为 MP4（H.264）即可";
   }
   vErrRun++;
   if (vErrRun >= videos.length){
-    $("vnow").textContent = "全都没法上演（编码不认，建议转 MP4）";
+    $("vnow").textContent = "全场无一可演：编码不为本机所识，建议转为 MP4";
     vErrRun = 0; return;
   }
   setTimeout(function(){ vPlayAt(curIdx + 1); }, 220);
 });
 
 $("vlock").onclick = function(){
-  if (!videos.length){ $("vmsg").textContent = "剧院还空着"; return; }
+  if (!videos.length){ $("vmsg").textContent = "片单尚空"; return; }
   vLocked = !vLocked;
   vSyncLock();
   $("vmsg").textContent = vLocked
-    ? "顺序、音量、离场，一律冻住"
-    : "都松开了";
+    ? "次序、音量、退场，一并封印"
+    : "已尽数解封";
 };
 
 $("vmaster").oninput = function(){
@@ -1175,20 +1139,20 @@ $("vexp").onclick = function(){
   saveK(KEY_V, o);
   var t = JSON.stringify(o);
   $("vcfg").value = t; openVCfg();
-  try { navigator.clipboard.writeText(t); $("vmsg").textContent="已抄好，也替你复制了"; }
-  catch(e){ $("vmsg").textContent="已抄好，请手动复制一下"; }
+  try { navigator.clipboard.writeText(t); $("vmsg").textContent="已誊录，并为您另抄一份"; }
+  catch(e){ $("vmsg").textContent="已誊录，还请您亲自抄一份"; }
 };
 $("vimp").onclick = function(){
   openVCfg();
-  $("vmsg").textContent = "把那段贴进来，再点「应用导入」";
+  $("vmsg").textContent = "请将咒文贴入此处，再点「照此吟诵」";
   try { $("vcfg").focus(); } catch(e){}
 };
 $("vcfgclose").onclick = function(){ $("vcfgbox").hidden = true; };
 $("vcfgcopy").onclick = function(){
   var t = $("vcfg").value;
-  if (!t){ $("vmsg").textContent="框里空空如也"; return; }
-  try { navigator.clipboard.writeText(t); $("vmsg").textContent="复制好了"; }
-  catch(e){ $("vmsg").textContent="复制没成功，手动选中吧"; }
+  if (!t){ $("vmsg").textContent="此处空无一物"; return; }
+  try { navigator.clipboard.writeText(t); $("vmsg").textContent="已抄入剪贴板"; }
+  catch(e){ $("vmsg").textContent="未能抄录，劳您手动选取"; }
 };
 $("vcfgapply").onclick = function(){
   try {
@@ -1212,17 +1176,15 @@ $("vcfgapply").onclick = function(){
     }
     if (typeof o.locked === "boolean"){ vLocked = o.locked; vSyncLock(); }
     saveK(KEY_V, o);
-    $("vmsg").textContent = "接上了：顺序、音量、锁定，一并归位";
+    $("vmsg").textContent = "已照此吟诵，一切如故";
     $("vcfgbox").hidden = true;
-  } catch(e){ $("vmsg").textContent="这段对不上，再检查一下？"; }
+  } catch(e){ $("vmsg").textContent="此咒文与现况不符，请再验看"; }
 };
 
 /* ============================================================
    全页面拖拽
    ============================================================ */
-function currentMode(){
-  return $("viewVideo").hidden ? "audio" : "video";
-}
+function currentMode(){ return $("viewVideo").hidden ? "audio" : "video"; }
 document.addEventListener("dragover", function(e){
   e.preventDefault();
   var h = currentMode() === "video" ? $("vdrophint") : $("drophint");
@@ -1254,9 +1216,24 @@ updEmpty();
 </script>
 
 <script>
+/* ================= 自动更新机制 ================= */
 if ("serviceWorker" in navigator) {
+  var hadController = !!navigator.serviceWorker.controller;
+  var reloaded = false;
+
+  navigator.serviceWorker.addEventListener("controllerchange", function(){
+    if (!hadController || reloaded) return;
+    reloaded = true;
+    location.reload();
+  });
+
   window.addEventListener("load", function(){
-    navigator.serviceWorker.register("./sw.js").catch(function(){});
+    navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" })
+      .then(function(reg){
+        try { reg.update(); } catch(e){}
+        setInterval(function(){ try { reg.update(); } catch(e){} }, 30000);
+      })
+      .catch(function(){});
   });
 }
 </script>
